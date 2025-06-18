@@ -28,6 +28,9 @@ const observer = new IntersectionObserver((entries) => {
 
 // Observe all fade-in elements
 document.addEventListener('DOMContentLoaded', () => {
+    // JavaScript가 로드되었음을 표시
+    document.body.classList.add('js-loaded');
+    
     const fadeElements = document.querySelectorAll('.fade-in');
     fadeElements.forEach(element => {
         observer.observe(element);
