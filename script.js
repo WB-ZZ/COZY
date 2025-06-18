@@ -77,8 +77,8 @@ function animateCounters() {
                 counter.textContent = Math.floor(current) + '%';
             } else if (counter.textContent.includes('/')) {
                 counter.textContent = counter.textContent; // Keep original for 24/7
-            } else if (counter.textContent.includes('실')) {
-                counter.textContent = Math.floor(current) + '실';
+            } else if (counter.textContent.includes('객실')) {
+                counter.textContent = Math.floor(current);
             } else {
                 counter.textContent = Math.floor(current);
             }

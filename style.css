@@ -574,8 +574,8 @@ body {
 /* ===== 통계 섹션 ===== */
 .stats {
     padding: 6rem 0;
-    background: var(--soft-black);
-    color: var(--white);
+    background: var(--deep-brown);
+    color: var(--pure-white);
 }
 
 .stats-grid {
@@ -593,7 +593,7 @@ body {
     font-family: 'Playfair Display', serif;
     font-size: 3rem;
     font-weight: 600;
-    color: var(--white);
+    color: var(--pure-white);
     display: block;
     margin-bottom: 0.5rem;
     letter-spacing: -0.02em;
@@ -601,7 +601,7 @@ body {
 
 .stat-label {
     font-size: 1rem;
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(254, 254, 254, 0.9);
     font-weight: 500;
     letter-spacing: -0.005em;
 }
