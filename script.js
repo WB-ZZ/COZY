@@ -98,12 +98,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     item.style.transition = 'all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
                     setTimeout(() => {
                         item.style.opacity = '1';
-                        item.style.transform = 'scale(1) translateY(0)';
+                        item.style.transform = 'perspective(1000px) rotateX(1deg)';
+                        item.style.visibility = 'visible';
                     }, index * 50);
                 } else {
                     item.style.transition = 'all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
                     item.style.opacity = '0';
-                    item.style.transform = 'scale(0.9) translateY(20px)';
+                    item.style.transform = 'perspective(1000px) rotateX(10deg) scale(0.9) translateY(20px)';
                     setTimeout(() => {
                         item.style.display = 'none';
                     }, 400);
@@ -128,6 +129,7 @@ document.querySelectorAll('.feature-card').forEach(card => {
         const icon = card.querySelector('.feature-icon');
         if (icon) {
             icon.style.transform = 'scale(1.1) rotate(5deg)';
+            icon.style.transition = 'transform 0.3s ease';
         }
     });
     
@@ -138,6 +140,37 @@ document.querySelectorAll('.feature-card').forEach(card => {
         }
     });
 });
+
+// Gallery item click to show modal
+document.querySelectorAll('.gallery-item').forEach(item => {
+    item.addEventListener('click', () => {
+        const img = item.querySelector('.gallery-image');
+        if (img) {
+            const modal = document.getElementById('galleryModal');
+            const modalImg = document.getElementById('modalImage');
+            if (modal && modalImg) {
+                modal.style.display = 'flex';
+                modalImg.src = img.src;
+                modalImg.alt = img.alt;
+            }
+        }
+    });
+});
+
+// Close modal
+const modalClose = document.getElementById('modalClose');
+const galleryModal = document.getElementById('galleryModal');
+if (modalClose && galleryModal) {
+    modalClose.addEventListener('click', () => {
+        galleryModal.style.display = 'none';
+    });
+    
+    galleryModal.addEventListener('click', (e) => {
+        if (e.target === galleryModal) {
+            galleryModal.style.display = 'none';
+        }
+    });
+}
 
 // Contact form handling
 document.addEventListener('DOMContentLoaded', () => {
