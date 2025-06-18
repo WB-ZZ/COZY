@@ -58,6 +58,45 @@
             color: var(--charcoal);
             background: var(--paper-white);
             overflow-x: hidden;
+            font-size: 16px;
+            -webkit-text-size-adjust: 100%;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        /* Enhanced touch targets */
+        button,
+        .btn,
+        .nav-link,
+        .filter-btn,
+        .counter-btn,
+        .booking-btn,
+        .modal-btn {
+            min-height: 44px;
+            min-width: 44px;
+            touch-action: manipulation;
+        }
+        
+        /* Improved focus states for accessibility */
+        button:focus,
+        .btn:focus,
+        .nav-link:focus,
+        .form-input:focus,
+        .form-select:focus,
+        .date-input:focus {
+            outline: 2px solid var(--soft-moss);
+            outline-offset: 2px;
+        }
+        
+        /* Smooth scrolling for better UX */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
         }
         
         /* ===== Header ===== */
@@ -110,7 +149,7 @@
         }
         
         .nav-link {
-            color: var(--warm-gray);
+            color: var(--slate-gray);
             text-decoration: none;
             font-weight: 500;
             padding: 0.5rem 1rem;
@@ -120,8 +159,8 @@
         }
         
         .nav-link:hover {
-            color: var(--sunset-orange);
-            background: var(--soft-peach);
+            color: var(--charcoal);
+            background: var(--sage-wash);
             transform: translateY(-2px);
         }
         
@@ -131,7 +170,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: var(--gradient-warm);
+            background: var(--gradient-earth);
             position: relative;
             overflow: hidden;
         }
@@ -171,7 +210,7 @@
         
         .hero-subtitle {
             font-size: clamp(1rem, 2vw, 1.3rem);
-            color: var(--warm-gray);
+            color: var(--slate-gray);
             margin-bottom: 2.5rem;
             font-weight: 300;
         }
@@ -200,8 +239,8 @@
         }
         
         .btn-primary {
-            background: var(--gradient-sunset);
-            color: var(--white);
+            background: var(--gradient-nature);
+            color: var(--charcoal);
             box-shadow: var(--shadow-soft);
         }
         
@@ -212,12 +251,12 @@
         
         .btn-secondary {
             background: var(--white);
-            color: var(--warm-gray);
-            border: 2px solid var(--gentle-coral);
+            color: var(--slate-gray);
+            border: 2px solid var(--sage-wash);
         }
         
         .btn-secondary:hover {
-            background: var(--soft-peach);
+            background: var(--mist-blue);
             transform: translateY(-3px);
         }
         
@@ -267,7 +306,7 @@
             left: 0;
             right: 0;
             height: 4px;
-            background: var(--gradient-sunset);
+            background: var(--gradient-nature);
             transform: scaleX(0);
             transition: transform 0.3s ease;
         }
@@ -284,14 +323,14 @@
         .feature-icon {
             width: 80px;
             height: 80px;
-            background: var(--gradient-warm);
+            background: var(--gradient-earth);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 1.5rem;
             font-size: 2rem;
-            color: var(--sunset-orange);
+            color: var(--charcoal);
         }
         
         .feature-title {
@@ -302,14 +341,252 @@
         }
         
         .feature-description {
-            color: var(--warm-gray);
+            color: var(--slate-gray);
             line-height: 1.6;
         }
         
+        /* ===== Gallery Section ===== */
+        .gallery {
+            padding: 5rem 0;
+            background: var(--gradient-sky);
+        }
+
+        .gallery-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+            grid-auto-rows: 200px;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            cursor: pointer;
+            background: var(--white);
+            box-shadow: var(--shadow-soft);
+            transition: all 0.4s ease;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: var(--shadow-hover);
+        }
+
+        /* Bento Grid Layout Variations */
+        .gallery-item:nth-child(1) {
+            grid-column: span 2;
+            grid-row: span 2;
+        }
+
+        .gallery-item:nth-child(4) {
+            grid-column: span 2;
+        }
+
+        .gallery-item:nth-child(6) {
+            grid-row: span 2;
+        }
+
+        .gallery-item:nth-child(8) {
+            grid-column: span 2;
+        }
+
+        .gallery-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.4s ease;
+            will-change: transform;
+        }
+        
+        .gallery-image.loaded {
+            opacity: 1;
+        }
+
+        .gallery-item:hover .gallery-image {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(74, 74, 74, 0) 0%, rgba(74, 74, 74, 0.8) 100%);
+            opacity: 0;
+            transition: all 0.4s ease;
+            display: flex;
+            align-items: flex-end;
+            justify-content: flex-start;
+            padding: 1.5rem;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-info {
+            color: var(--white);
+            transform: translateY(20px);
+            transition: all 0.4s ease;
+        }
+
+        .gallery-item:hover .gallery-info {
+            transform: translateY(0);
+        }
+
+        .gallery-category {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 0.3rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .gallery-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .gallery-description {
+            font-size: 0.85rem;
+            opacity: 0.9;
+            line-height: 1.4;
+        }
+
+        /* Gallery Filter Buttons */
+        .gallery-filters {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            padding: 0 1rem;
+        }
+
+        .filter-btn {
+            padding: 0.8rem 1.8rem;
+            border: 2px solid var(--sage-wash);
+            background: var(--white);
+            color: var(--charcoal);
+            border-radius: 30px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            font-size: 0.95rem;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            white-space: nowrap;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--gradient-nature);
+            color: var(--charcoal);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-soft);
+        }
+        
+        .filter-btn:focus {
+            outline: 2px solid var(--soft-moss);
+            outline-offset: 2px;
+        }
+
+        /* Modal for Gallery */
+        .gallery-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .gallery-modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+        }
+
+        .modal-image {
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 15px;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            transform: scale(1.2);
+            color: var(--sage-wash);
+        }
+
+        /* Responsive Gallery */
+        @media (max-width: 768px) {
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                grid-auto-rows: 250px;
+                gap: 1rem;
+            }
+
+            .gallery-item:nth-child(1),
+            .gallery-item:nth-child(4),
+            .gallery-item:nth-child(6),
+            .gallery-item:nth-child(8) {
+                grid-column: span 1;
+                grid-row: span 1;
+            }
+
+            .gallery-filters {
+                gap: 0.5rem;
+            }
+
+            .filter-btn {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.85rem;
+            }
+
+            .gallery-overlay {
+                padding: 1rem;
+            }
+        }
+
         /* ===== Stats Section ===== */
         .stats {
             padding: 5rem 0;
-            background: var(--gradient-soft);
+            background: var(--gradient-earth);
         }
         
         .stats-grid {
@@ -327,14 +604,14 @@
             font-family: 'Comfortaa', sans-serif;
             font-size: 3rem;
             font-weight: 700;
-            color: var(--sunset-orange);
+            color: var(--charcoal);
             display: block;
             margin-bottom: 0.5rem;
         }
         
         .stat-label {
             font-size: 1.1rem;
-            color: var(--warm-gray);
+            color: var(--slate-gray);
             font-weight: 500;
         }
         
@@ -360,14 +637,560 @@
         
         .cta-subtitle {
             font-size: 1.2rem;
-            color: var(--warm-gray);
+            color: var(--slate-gray);
             margin-bottom: 2.5rem;
         }
         
+        /* ===== Contact Section ===== */
+        .contact {
+            padding: 5rem 0;
+            background: var(--gradient-sky);
+            position: relative;
+        }
+
+        .contact-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .contact-info {
+            padding: 2rem;
+        }
+
+        .contact-info h3 {
+            font-family: 'Comfortaa', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--soft-black);
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: var(--white);
+            border-radius: 15px;
+            box-shadow: var(--shadow-soft);
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .contact-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-nature);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--charcoal);
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .contact-details h4 {
+            font-weight: 600;
+            color: var(--soft-black);
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-details p {
+            color: var(--slate-gray);
+            font-size: 0.95rem;
+        }
+
+        /* ===== Booking System ===== */
+        .booking-system {
+            background: var(--white);
+            border-radius: 25px;
+            padding: 2.5rem;
+            box-shadow: var(--shadow-hover);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .booking-system::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: var(--gradient-nature);
+        }
+
+        .booking-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .booking-header h3 {
+            font-family: 'Comfortaa', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--soft-black);
+            margin-bottom: 0.5rem;
+        }
+
+        .booking-header p {
+            color: var(--slate-gray);
+            font-size: 0.95rem;
+        }
+
+        /* Calendar Widget */
+        .calendar-section {
+            margin-bottom: 2rem;
+        }
+
+        .calendar-label {
+            font-weight: 600;
+            color: var(--soft-black);
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .date-inputs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .date-input-group {
+            position: relative;
+        }
+
+        .date-input-group label {
+            font-size: 0.85rem;
+            color: var(--slate-gray);
+            margin-bottom: 0.5rem;
+            display: block;
+            font-weight: 500;
+        }
+
+        .date-input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--sage-wash);
+            border-radius: 15px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: var(--white);
+            color: var(--charcoal);
+        }
+
+        .date-input:focus {
+            outline: none;
+            border-color: var(--soft-moss);
+            background: var(--mist-blue);
+            box-shadow: 0 0 0 3px rgba(212, 230, 225, 0.2);
+        }
+
+        /* Booking Form */
+        .booking-form {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-field {
+            position: relative;
+        }
+
+        .form-field label {
+            font-size: 0.85rem;
+            color: var(--slate-gray);
+            margin-bottom: 0.5rem;
+            display: block;
+            font-weight: 500;
+        }
+
+        .form-input,
+        .form-select {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--sage-wash);
+            border-radius: 15px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: var(--white);
+            color: var(--charcoal);
+        }
+
+        .form-input:focus,
+        .form-select:focus {
+            outline: none;
+            border-color: var(--soft-moss);
+            background: var(--mist-blue);
+            box-shadow: 0 0 0 3px rgba(212, 230, 225, 0.2);
+        }
+
+        /* Guest Counter */
+        .guest-counter {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: var(--cloud-gray);
+            padding: 1rem;
+            border-radius: 15px;
+            border: 2px solid var(--sage-wash);
+        }
+
+        .counter-label {
+            flex: 1;
+            font-weight: 500;
+            color: var(--charcoal);
+        }
+
+        .counter-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .counter-btn {
+            width: 40px;
+            height: 40px;
+            border: none;
+            border-radius: 50%;
+            background: var(--gradient-nature);
+            color: var(--charcoal);
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .counter-btn:hover {
+            transform: scale(1.1);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .counter-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .counter-value {
+            font-weight: 600;
+            color: var(--soft-black);
+            min-width: 2rem;
+            text-align: center;
+        }
+
+        /* Additional Options */
+        .additional-options {
+            background: var(--cloud-gray);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border: 2px solid var(--sage-wash);
+        }
+
+        .additional-options h4 {
+            font-weight: 600;
+            color: var(--soft-black);
+            margin-bottom: 1rem;
+        }
+
+        .options-grid {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .option-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem;
+            background: var(--white);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .option-item:hover {
+            background: var(--mist-blue);
+        }
+
+        .option-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+        }
+
+        .option-name {
+            font-weight: 500;
+            color: var(--charcoal);
+        }
+
+        .option-price {
+            font-size: 0.85rem;
+            color: var(--slate-gray);
+        }
+
+        .option-checkbox {
+            width: 20px;
+            height: 20px;
+            accent-color: var(--soft-moss);
+        }
+
+        /* Price Summary */
+        .price-summary {
+            background: var(--lavender-mist);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border: 2px solid var(--sage-wash);
+            margin-top: 1rem;
+        }
+
+        .price-summary h4 {
+            font-weight: 600;
+            color: var(--soft-black);
+            margin-bottom: 1rem;
+        }
+
+        .price-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            color: var(--slate-gray);
+        }
+
+        .price-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--soft-black);
+            padding-top: 1rem;
+            border-top: 2px solid var(--sage-wash);
+            margin-top: 1rem;
+        }
+
+        /* Booking Button */
+        .booking-btn {
+            width: 100%;
+            padding: 1.2rem;
+            background: var(--gradient-nature);
+            color: var(--charcoal);
+            border: none;
+            border-radius: 15px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .booking-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .booking-btn:active {
+            transform: translateY(-1px);
+        }
+
+        /* Booking Modal */
+        .booking-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 3000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .booking-modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--white);
+            border-radius: 25px;
+            padding: 2.5rem;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .modal-header h3 {
+            font-family: 'Comfortaa', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--soft-black);
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--slate-gray);
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            color: var(--soft-black);
+            transform: scale(1.2);
+        }
+
+        .booking-summary {
+            background: var(--cloud-gray);
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.8rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid var(--sage-wash);
+        }
+
+        .summary-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+            font-weight: 600;
+            color: var(--soft-black);
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .modal-btn {
+            flex: 1;
+            padding: 1rem;
+            border: none;
+            border-radius: 15px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .modal-btn-primary {
+            background: var(--gradient-nature);
+            color: var(--charcoal);
+        }
+
+        .modal-btn-secondary {
+            background: var(--sage-wash);
+            color: var(--charcoal);
+        }
+
+        .modal-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-soft);
+        }
+
+        /* Responsive Design for Contact */
+        @media (max-width: 968px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .booking-system {
+                padding: 2rem;
+            }
+
+            .date-inputs {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-content {
+                padding: 2rem;
+                margin: 1rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .contact {
+                padding: 3rem 0;
+            }
+
+            .contact-container {
+                padding: 0 1rem;
+            }
+
+            .booking-system {
+                padding: 1.5rem;
+            }
+
+            .guest-counter {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .counter-controls {
+                justify-content: center;
+            }
+        }
+
         /* ===== Footer ===== */
         .footer {
             background: var(--soft-black);
-            color: var(--light-gray);
+            color: var(--muted-gray);
             padding: 3rem 0 1.5rem;
             text-align: center;
         }
@@ -380,12 +1203,12 @@
             font-family: 'Comfortaa', sans-serif;
             font-size: 1.5rem;
             font-weight: 700;
-            color: var(--sunset-orange);
+            color: var(--sage-wash);
             margin-bottom: 1rem;
         }
         
         .footer-text {
-            color: var(--light-gray);
+            color: var(--muted-gray);
             margin-bottom: 1.5rem;
         }
         
@@ -399,12 +1222,12 @@
         .social-link {
             width: 45px;
             height: 45px;
-            background: var(--gradient-sunset);
+            background: var(--gradient-nature);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--white);
+            color: var(--charcoal);
             text-decoration: none;
             font-size: 1.2rem;
             transition: all 0.3s ease;
@@ -415,46 +1238,655 @@
         }
         
         .footer-bottom {
-            border-top: 1px solid rgba(221, 214, 224, 0.2);
+            border-top: 1px solid rgba(156, 163, 175, 0.2);
             padding-top: 1.5rem;
             font-size: 0.9rem;
-            color: var(--light-gray);
+            color: var(--muted-gray);
         }
         
-        /* ===== Responsive Design ===== */
-        @media (max-width: 768px) {
+        /* ===== Mobile Navigation ===== */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--slate-gray);
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-toggle:hover {
+            background: var(--sage-wash);
+            color: var(--charcoal);
+        }
+
+        .mobile-nav-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-nav-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .mobile-nav-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 280px;
+            height: 100%;
+            background: var(--white);
+            z-index: 2000;
+            padding: 2rem 1.5rem;
+            box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            overflow-y: auto;
+        }
+
+        .mobile-nav-menu.active {
+            right: 0;
+        }
+
+        .mobile-nav-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--sage-wash);
+        }
+
+        .mobile-nav-logo {
+            font-family: 'Comfortaa', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--slate-gray);
+        }
+
+        .mobile-nav-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--slate-gray);
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-nav-close:hover {
+            background: var(--sage-wash);
+            color: var(--charcoal);
+        }
+
+        .mobile-nav-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .mobile-nav-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .mobile-nav-links a {
+            display: block;
+            padding: 1rem;
+            color: var(--slate-gray);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .mobile-nav-links a:hover,
+        .mobile-nav-links a:active {
+            background: var(--sage-wash);
+            color: var(--charcoal);
+            border-color: var(--soft-moss);
+            transform: translateX(5px);
+        }
+
+        /* ===== Enhanced Responsive Design ===== */
+        
+        /* Mobile Portrait: 320px - 480px */
+        @media (max-width: 480px) {
+            .nav-container {
+                padding: 0 1rem;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+
             .nav-menu {
-                gap: 1rem;
+                display: none;
             }
-            
-            .nav-link {
-                padding: 0.3rem 0.8rem;
-                font-size: 0.9rem;
+
+            .logo {
+                font-size: 1.5rem;
             }
-            
+
+            .hero {
+                padding: 2rem 1rem;
+            }
+
+            .hero-content {
+                padding: 1rem;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+                line-height: 1.3;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+                margin-bottom: 2rem;
+            }
+
             .hero-buttons {
                 flex-direction: column;
-                align-items: center;
+                gap: 1rem;
             }
-            
+
             .btn {
                 width: 100%;
-                max-width: 280px;
+                max-width: none;
+                padding: 1.2rem 2rem;
+                font-size: 1.1rem;
+                min-height: 50px;
                 justify-content: center;
             }
-            
+
+            .container {
+                padding: 0 1rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+                margin-bottom: 2rem;
+            }
+
+            .features {
+                padding: 3rem 0;
+            }
+
             .features-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .feature-card {
+                padding: 1.5rem;
+                text-align: center;
+            }
+
+            .feature-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+
+            .feature-title {
+                font-size: 1.3rem;
+            }
+
+            .feature-description {
+                font-size: 0.95rem;
+                line-height: 1.5;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+
+            .stat-item {
+                padding: 1.5rem 1rem;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+
+            .stat-label {
+                font-size: 0.9rem;
+            }
+
+            .gallery {
+                padding: 3rem 0;
+            }
+
+            .gallery-container {
+                padding: 0 1rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                grid-auto-rows: 200px;
+                gap: 1rem;
+            }
+
+            .gallery-item:nth-child(1),
+            .gallery-item:nth-child(4),
+            .gallery-item:nth-child(6),
+            .gallery-item:nth-child(8) {
+                grid-column: span 1;
+                grid-row: span 1;
+            }
+
+            .gallery-filters {
+                gap: 0.5rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .filter-btn {
+                padding: 0.7rem 1.2rem;
+                font-size: 0.85rem;
+                min-height: 44px;
+            }
+
+            .gallery-overlay {
+                padding: 1rem;
+            }
+
+            .gallery-title {
+                font-size: 1rem;
+            }
+
+            .gallery-description {
+                font-size: 0.8rem;
+            }
+
+            .contact {
+                padding: 3rem 0;
+            }
+
+            .contact-container {
+                padding: 0 1rem;
+            }
+
+            .contact-grid {
                 grid-template-columns: 1fr;
                 gap: 2rem;
             }
-            
-            .feature-card {
-                padding: 2rem;
+
+            .contact-info h3 {
+                font-size: 1.5rem;
             }
-            
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
+
+            .contact-item {
+                padding: 1rem;
+            }
+
+            .contact-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+
+            .booking-system {
+                padding: 1.5rem;
+            }
+
+            .booking-header h3 {
+                font-size: 1.4rem;
+            }
+
+            .date-inputs {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .form-input,
+            .form-select,
+            .date-input {
+                padding: 1rem;
+                font-size: 1rem;
+                min-height: 50px;
+                border-radius: 12px;
+            }
+
+            .guest-counter {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 1rem;
+                padding: 1.2rem;
+            }
+
+            .counter-controls {
+                justify-content: center;
                 gap: 1.5rem;
+            }
+
+            .counter-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 1.4rem;
+            }
+
+            .counter-value {
+                font-size: 1.2rem;
+                min-width: 3rem;
+            }
+
+            .additional-options {
+                padding: 1.2rem;
+            }
+
+            .option-item {
+                padding: 1rem;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+
+            .option-checkbox {
+                width: 24px;
+                height: 24px;
+                align-self: flex-end;
+            }
+
+            .price-summary {
+                padding: 1.2rem;
+            }
+
+            .price-item {
+                font-size: 0.95rem;
+            }
+
+            .price-total {
+                font-size: 1.1rem;
+            }
+
+            .booking-btn {
+                padding: 1.3rem;
+                font-size: 1.1rem;
+                min-height: 54px;
+            }
+
+            .modal-content {
+                width: 95%;
+                max-width: none;
+                margin: 1rem;
+                padding: 1.5rem;
+                max-height: 85vh;
+            }
+
+            .modal-header h3 {
+                font-size: 1.4rem;
+            }
+
+            .booking-summary {
+                padding: 1rem;
+            }
+
+            .summary-item {
+                font-size: 0.9rem;
+                margin-bottom: 0.6rem;
+                padding-bottom: 0.6rem;
+            }
+
+            .modal-buttons {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+
+            .modal-btn {
+                padding: 1.2rem;
+                font-size: 1rem;
+                min-height: 50px;
+            }
+
+            .footer {
+                padding: 2rem 0 1rem;
+            }
+
+            .footer-logo {
+                font-size: 1.3rem;
+            }
+
+            .social-links {
+                gap: 0.8rem;
+            }
+
+            .social-link {
+                width: 40px;
+                height: 40px;
+                font-size: 1.1rem;
+            }
+        }
+
+        /* Mobile Landscape / Small Tablet: 481px - 768px */
+        @media (min-width: 481px) and (max-width: 768px) {
+            .nav-container {
+                padding: 0 1.5rem;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .hero-buttons {
+                flex-direction: row;
+                justify-content: center;
+                gap: 1rem;
+            }
+
+            .btn {
+                min-width: 160px;
+                padding: 1.1rem 2rem;
+                min-height: 48px;
+            }
+
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 1.5rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+                grid-auto-rows: 180px;
+            }
+
+            .gallery-item:nth-child(1) {
+                grid-column: span 2;
+                grid-row: span 2;
+            }
+
+            .gallery-item:nth-child(4),
+            .gallery-item:nth-child(8) {
+                grid-column: span 2;
+                grid-row: span 1;
+            }
+
+            .filter-btn {
+                min-height: 44px;
+                padding: 0.8rem 1.5rem;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .date-inputs {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .form-input,
+            .form-select,
+            .date-input {
+                min-height: 48px;
+            }
+
+            .guest-counter {
+                flex-direction: row;
+            }
+
+            .counter-btn {
+                width: 48px;
+                height: 48px;
+            }
+
+            .option-item {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .modal-content {
+                width: 90%;
+                max-width: 500px;
+            }
+
+            .modal-buttons {
+                flex-direction: row;
+            }
+        }
+
+        /* Tablet Portrait: 769px - 1024px */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .nav-menu {
+                gap: 1.5rem;
+            }
+
+            .nav-link {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.95rem;
+            }
+
+            .hero-title {
+                font-size: 3rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2.5rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(3, 1fr);
+                grid-auto-rows: 200px;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 3rem;
+            }
+
+            .container,
+            .contact-container,
+            .gallery-container {
+                padding: 0 2rem;
+            }
+        }
+
+        /* Desktop: 1025px+ */
+        @media (min-width: 1025px) {
+            .mobile-menu-toggle {
+                display: none;
+            }
+
+            .nav-menu {
+                display: flex;
+            }
+        }
+
+        /* Touch-specific optimizations */
+        @media (hover: none) and (pointer: coarse) {
+            .btn,
+            .nav-link,
+            .filter-btn,
+            .counter-btn,
+            .booking-btn,
+            .modal-btn {
+                min-height: 44px;
+                min-width: 44px;
+            }
+
+            .gallery-item:hover {
+                transform: none;
+            }
+
+            .gallery-item:active {
+                transform: scale(0.98);
+            }
+
+            .feature-card:hover {
+                transform: none;
+            }
+
+            .feature-card:active {
+                transform: translateY(-5px);
+            }
+        }
+
+        /* Reduce animations on slow devices */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* High contrast mode support */
+        @media (prefers-contrast: high) {
+            .btn,
+            .nav-link,
+            .filter-btn {
+                border: 2px solid currentColor;
+            }
+
+            .gallery-overlay {
+                background: rgba(0, 0, 0, 0.9);
             }
         }
         
@@ -486,14 +1918,40 @@
     <header class="header">
         <nav class="nav-container">
             <a href="#" class="logo">코지 펜션</a>
+            
+            <!-- Desktop Navigation -->
             <ul class="nav-menu">
                 <li><a href="#home" class="nav-link">홈</a></li>
                 <li><a href="#features" class="nav-link">객실/시설</a></li>
+                <li><a href="#gallery" class="nav-link">갤러리</a></li>
                 <li><a href="#about" class="nav-link">소개</a></li>
                 <li><a href="#contact" class="nav-link">연락처</a></li>
             </ul>
+            
+            <!-- Mobile Menu Toggle -->
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="메뉴 열기">
+                <i class="fas fa-bars"></i>
+            </button>
         </nav>
     </header>
+    
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
+    <nav class="mobile-nav-menu" id="mobileNavMenu">
+        <div class="mobile-nav-header">
+            <div class="mobile-nav-logo">코지 펜션 🏡</div>
+            <button class="mobile-nav-close" id="mobileNavClose" aria-label="메뉴 닫기">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <ul class="mobile-nav-links">
+            <li><a href="#home" class="mobile-nav-link">🏠 홈</a></li>
+            <li><a href="#features" class="mobile-nav-link">🏨 객실/시설</a></li>
+            <li><a href="#gallery" class="mobile-nav-link">📸 갤러리</a></li>
+            <li><a href="#about" class="mobile-nav-link">ℹ️ 소개</a></li>
+            <li><a href="#contact" class="mobile-nav-link">📞 연락처</a></li>
+        </ul>
+    </nav>
 
     <!-- Hero Section -->
     <section id="home" class="hero">
@@ -569,6 +2027,142 @@
         </div>
     </section>
 
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery">
+        <div class="gallery-container">
+            <h2 class="section-title fade-in">📸 펜션의 아름다운 모습들</h2>
+            
+            <!-- Gallery Filters -->
+            <div class="gallery-filters fade-in">
+                <button class="filter-btn active" data-filter="all">전체</button>
+                <button class="filter-btn" data-filter="exterior">외관</button>
+                <button class="filter-btn" data-filter="room">객실</button>
+                <button class="filter-btn" data-filter="facility">시설</button>
+                <button class="filter-btn" data-filter="nature">자연</button>
+                <button class="filter-btn" data-filter="food">음식</button>
+            </div>
+            
+            <!-- Gallery Grid -->
+            <div class="gallery-grid">
+                <!-- 펜션 외관 (Large Featured) -->
+                <div class="gallery-item fade-in" data-category="exterior">
+                    <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800" alt="펜션 외관" class="gallery-image" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <div class="gallery-category">Exterior</div>
+                            <div class="gallery-title">아늑한 펜션 외관</div>
+                            <div class="gallery-description">자연과 조화를 이루는 따뜻한 펜션의 모습</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 객실 내부 -->
+                <div class="gallery-item fade-in" data-category="room">
+                    <img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800" alt="객실 내부" class="gallery-image" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <div class="gallery-category">Room</div>
+                            <div class="gallery-title">모던 객실</div>
+                            <div class="gallery-description">깔끔하고 세련된 인테리어의 객실</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 침실 -->
+                <div class="gallery-item fade-in" data-category="room">
+                    <img src="https://images.unsplash.com/photo-1566665797739-1674de7a421a?w=800" alt="침실" class="gallery-image" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <div class="gallery-category">Room</div>
+                            <div class="gallery-title">편안한 침실</div>
+                            <div class="gallery-description">푹신한 침구와 아늑한 분위기</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 거실 (Wide) -->
+                <div class="gallery-item fade-in" data-category="room">
+                    <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800" alt="거실" class="gallery-image" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <div class="gallery-category">Room</div>
+                            <div class="gallery-title">넓은 거실 공간</div>
+                            <div class="gallery-description">가족과 함께 휴식을 취할 수 있는 공간</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 욕실 -->
+                <div class="gallery-item fade-in" data-category="facility">
+                    <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=800" alt="욕실" class="gallery-image" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <div class="gallery-category">Facility</div>
+                            <div class="gallery-title">럭셔리 욕실</div>
+                            <div class="gallery-description">모던하고 깨끗한 욕실 시설</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 수영장 (Tall) -->
+                <div class="gallery-item fade-in" data-category="facility">
+                    <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800" alt="수영장" class="gallery-image" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <div class="gallery-category">Facility</div>
+                            <div class="gallery-title">야외 수영장</div>
+                            <div class="gallery-description">맑은 물과 함께하는 힐링 타임</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 정원 -->
+                <div class="gallery-item fade-in" data-category="nature">
+                    <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800" alt="정원" class="gallery-image" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <div class="gallery-category">Nature</div>
+                            <div class="gallery-title">아름다운 정원</div>
+                            <div class="gallery-description">계절마다 변하는 자연의 아름다움</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 식사 (Wide) -->
+                <div class="gallery-item fade-in" data-category="food">
+                    <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=800" alt="식사" class="gallery-image" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <div class="gallery-category">Food</div>
+                            <div class="gallery-title">맛있는 식사</div>
+                            <div class="gallery-description">신선한 재료로 만든 건강한 요리</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 자연 풍경 -->
+                <div class="gallery-item fade-in" data-category="nature">
+                    <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800" alt="자연 풍경" class="gallery-image" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <div class="gallery-category">Nature</div>
+                            <div class="gallery-title">숲속 풍경</div>
+                            <div class="gallery-description">펜션 주변의 울창한 자연</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Modal -->
+    <div class="gallery-modal" id="galleryModal">
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose">&times;</button>
+            <img src="" alt="" class="modal-image" id="modalImage">
+        </div>
+    </div>
+
     <!-- Stats Section -->
     <section class="stats">
         <div class="container">
@@ -606,6 +2200,225 @@
             </div>
         </div>
     </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="contact-container">
+            <h2 class="section-title fade-in">📞 예약 문의 및 연락처</h2>
+            
+            <div class="contact-grid">
+                <!-- Contact Information -->
+                <div class="contact-info fade-in">
+                    <h3>연락처 정보</h3>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>전화번호</h4>
+                            <p>010-1234-5678<br>02-123-4567</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>이메일</h4>
+                            <p>info@cozypension.com<br>reservation@cozypension.com</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>주소</h4>
+                            <p>강원도 춘천시 자연길 123<br>코지 펜션 (우 24264)</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>운영시간</h4>
+                            <p>체크인: 15:00 - 22:00<br>체크아웃: 06:00 - 11:00</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Booking System -->
+                <div class="booking-system fade-in">
+                    <div class="booking-header">
+                        <h3>실시간 예약 시스템</h3>
+                        <p>원하는 날짜와 옵션을 선택하여 바로 예약하세요</p>
+                    </div>
+                    
+                    <form class="booking-form" id="bookingForm">
+                        <!-- Date Selection -->
+                        <div class="calendar-section">
+                            <label class="calendar-label">
+                                <i class="fas fa-calendar-alt"></i>
+                                체크인 / 체크아웃 날짜
+                            </label>
+                            <div class="date-inputs">
+                                <div class="date-input-group">
+                                    <label for="checkin">체크인</label>
+                                    <input type="date" id="checkin" class="date-input" required>
+                                </div>
+                                <div class="date-input-group">
+                                    <label for="checkout">체크아웃</label>
+                                    <input type="date" id="checkout" class="date-input" required>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Room and Guest Selection -->
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div class="form-field">
+                                    <label for="roomType">객실 타입</label>
+                                    <select id="roomType" class="form-select" required>
+                                        <option value="">객실을 선택해주세요</option>
+                                        <option value="standard" data-price="80000">스탠다드룸 (80,000원/박)</option>
+                                        <option value="deluxe" data-price="120000">디럭스룸 (120,000원/박)</option>
+                                        <option value="suite" data-price="180000">스위트룸 (180,000원/박)</option>
+                                        <option value="family" data-price="150000">패밀리룸 (150,000원/박)</option>
+                                    </select>
+                                </div>
+                                <div class="form-field">
+                                    <label for="guestName">예약자명</label>
+                                    <input type="text" id="guestName" class="form-input" placeholder="성함을 입력해주세요" required>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Guest Counter -->
+                        <div class="form-group">
+                            <div class="guest-counter">
+                                <span class="counter-label">
+                                    <i class="fas fa-users"></i>
+                                    투숙 인원
+                                </span>
+                                <div class="counter-controls">
+                                    <button type="button" class="counter-btn" id="decreaseGuests">-</button>
+                                    <span class="counter-value" id="guestCount">2</span>
+                                    <button type="button" class="counter-btn" id="increaseGuests">+</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Contact Information -->
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div class="form-field">
+                                    <label for="phone">연락처</label>
+                                    <input type="tel" id="phone" class="form-input" placeholder="010-1234-5678" required>
+                                </div>
+                                <div class="form-field">
+                                    <label for="email">이메일</label>
+                                    <input type="email" id="email" class="form-input" placeholder="example@email.com">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Additional Options -->
+                        <div class="additional-options">
+                            <h4>
+                                <i class="fas fa-plus-circle"></i>
+                                추가 옵션
+                            </h4>
+                            <div class="options-grid">
+                                <div class="option-item">
+                                    <div class="option-info">
+                                        <span class="option-name">조식 서비스</span>
+                                        <span class="option-price">+15,000원/인</span>
+                                    </div>
+                                    <input type="checkbox" class="option-checkbox" id="breakfast" data-price="15000">
+                                </div>
+                                <div class="option-item">
+                                    <div class="option-info">
+                                        <span class="option-name">바베큐 세트</span>
+                                        <span class="option-price">+35,000원/세트</span>
+                                    </div>
+                                    <input type="checkbox" class="option-checkbox" id="bbq" data-price="35000">
+                                </div>
+                                <div class="option-item">
+                                    <div class="option-info">
+                                        <span class="option-name">늦은 체크아웃</span>
+                                        <span class="option-price">+20,000원 (14시까지)</span>
+                                    </div>
+                                    <input type="checkbox" class="option-checkbox" id="lateCheckout" data-price="20000">
+                                </div>
+                                <div class="option-item">
+                                    <div class="option-info">
+                                        <span class="option-name">반려동물 동반</span>
+                                        <span class="option-price">+10,000원/마리</span>
+                                    </div>
+                                    <input type="checkbox" class="option-checkbox" id="pet" data-price="10000">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Price Summary -->
+                        <div class="price-summary">
+                            <h4>
+                                <i class="fas fa-calculator"></i>
+                                예약 요금 계산
+                            </h4>
+                            <div class="price-item">
+                                <span>객실 요금</span>
+                                <span id="roomPrice">0원</span>
+                            </div>
+                            <div class="price-item">
+                                <span>추가 옵션</span>
+                                <span id="optionPrice">0원</span>
+                            </div>
+                            <div class="price-item">
+                                <span>숙박 일수</span>
+                                <span id="nightCount">0박</span>
+                            </div>
+                            <div class="price-total">
+                                <span>총 결제 금액</span>
+                                <span id="totalPrice">0원</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Booking Button -->
+                        <button type="submit" class="booking-btn">
+                            <i class="fas fa-calendar-check"></i>
+                            예약 확인하기
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Confirmation Modal -->
+    <div class="booking-modal" id="bookingModal">
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose">&times;</button>
+            <div class="modal-header">
+                <h3>예약 확인</h3>
+                <p>예약 정보를 확인해주세요</p>
+            </div>
+            
+            <div class="booking-summary" id="bookingSummary">
+                <!-- Summary content will be populated by JavaScript -->
+            </div>
+            
+            <div class="modal-buttons">
+                <button class="modal-btn modal-btn-secondary" id="editBooking">수정하기</button>
+                <button class="modal-btn modal-btn-primary" id="confirmBooking">예약 확정</button>
+            </div>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer class="footer">
@@ -677,10 +2490,10 @@
         window.addEventListener('scroll', () => {
             const header = document.querySelector('.header');
             if (window.scrollY > 100) {
-                header.style.background = 'rgba(255, 248, 240, 0.98)';
-                header.style.boxShadow = '0 2px 20px rgba(255, 159, 122, 0.1)';
+                header.style.background = 'rgba(254, 254, 254, 0.98)';
+                header.style.boxShadow = '0 2px 20px rgba(212, 230, 225, 0.2)';
             } else {
-                header.style.background = 'rgba(255, 248, 240, 0.95)';
+                header.style.background = 'rgba(254, 254, 254, 0.95)';
                 header.style.boxShadow = 'none';
             }
         });
@@ -738,6 +2551,567 @@
             card.addEventListener('mouseleave', () => {
                 const icon = card.querySelector('.feature-icon');
                 icon.style.transform = 'scale(1) rotate(0deg)';
+            });
+        });
+
+        // Gallery functionality
+        document.addEventListener('DOMContentLoaded', () => {
+            // Gallery filter functionality
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const filter = button.getAttribute('data-filter');
+                    
+                    // Update active button
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    
+                    // Filter gallery items
+                    galleryItems.forEach(item => {
+                        const category = item.getAttribute('data-category');
+                        
+                        if (filter === 'all' || category === filter) {
+                            item.style.display = 'block';
+                            setTimeout(() => {
+                                item.style.opacity = '1';
+                                item.style.transform = 'scale(1)';
+                            }, 50);
+                        } else {
+                            item.style.opacity = '0';
+                            item.style.transform = 'scale(0.8)';
+                            setTimeout(() => {
+                                item.style.display = 'none';
+                            }, 300);
+                        }
+                    });
+                });
+            });
+
+            // Gallery modal functionality
+            const galleryModal = document.getElementById('galleryModal');
+            const modalImage = document.getElementById('modalImage');
+            const modalClose = document.getElementById('modalClose');
+            
+            // Open modal when clicking on gallery items
+            galleryItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    const img = item.querySelector('.gallery-image');
+                    const title = item.querySelector('.gallery-title').textContent;
+                    
+                    modalImage.src = img.src;
+                    modalImage.alt = title;
+                    galleryModal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+            
+            // Close modal
+            const closeModal = () => {
+                galleryModal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            };
+            
+            modalClose.addEventListener('click', closeModal);
+            galleryModal.addEventListener('click', (e) => {
+                if (e.target === galleryModal) {
+                    closeModal();
+                }
+            });
+            
+            // Close modal with Escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && galleryModal.classList.contains('active')) {
+                    closeModal();
+                }
+            });
+
+            // Lazy loading animation for gallery items
+            const galleryObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target.querySelector('.gallery-image');
+                        if (img) {
+                            img.style.opacity = '1';
+                            img.style.transform = 'scale(1)';
+                        }
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '50px 0px'
+            });
+
+            galleryItems.forEach(item => {
+                const img = item.querySelector('.gallery-image');
+                if (img) {
+                    img.style.opacity = '0';
+                    img.style.transform = 'scale(0.95)';
+                    img.style.transition = 'all 0.6s ease';
+                }
+                galleryObserver.observe(item);
+            });
+
+            // Add smooth staggered animation to gallery items
+            const staggerDelay = 100;
+            galleryItems.forEach((item, index) => {
+                item.style.animationDelay = `${index * staggerDelay}ms`;
+            });
+        });
+
+        // ===== Mobile Navigation Functionality =====
+        document.addEventListener('DOMContentLoaded', () => {
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            const mobileNavOverlay = document.getElementById('mobileNavOverlay');
+            const mobileNavMenu = document.getElementById('mobileNavMenu');
+            const mobileNavClose = document.getElementById('mobileNavClose');
+            const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+            
+            // Open mobile menu
+            mobileMenuToggle.addEventListener('click', () => {
+                mobileNavOverlay.classList.add('active');
+                mobileNavMenu.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+            
+            // Close mobile menu
+            function closeMobileMenu() {
+                mobileNavOverlay.classList.remove('active');
+                mobileNavMenu.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+            
+            mobileNavClose.addEventListener('click', closeMobileMenu);
+            mobileNavOverlay.addEventListener('click', closeMobileMenu);
+            
+            // Close menu when clicking nav links
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', closeMobileMenu);
+            });
+            
+            // Close menu with Escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && mobileNavMenu.classList.contains('active')) {
+                    closeMobileMenu();
+                }
+            });
+            
+            // Handle screen resize
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 1024) {
+                    closeMobileMenu();
+                }
+            });
+        });
+        
+        // ===== Touch and Swipe Support for Gallery =====
+        document.addEventListener('DOMContentLoaded', () => {
+            let startX = 0;
+            let startY = 0;
+            let currentX = 0;
+            let currentY = 0;
+            let isSwipeDetected = false;
+            
+            const galleryGrid = document.querySelector('.gallery-grid');
+            
+            if (galleryGrid) {
+                galleryGrid.addEventListener('touchstart', (e) => {
+                    startX = e.touches[0].clientX;
+                    startY = e.touches[0].clientY;
+                    isSwipeDetected = false;
+                }, { passive: true });
+                
+                galleryGrid.addEventListener('touchmove', (e) => {
+                    if (!startX || !startY) return;
+                    
+                    currentX = e.touches[0].clientX;
+                    currentY = e.touches[0].clientY;
+                    
+                    const diffX = Math.abs(currentX - startX);
+                    const diffY = Math.abs(currentY - startY);
+                    
+                    if (diffX > 30 || diffY > 30) {
+                        isSwipeDetected = true;
+                    }
+                }, { passive: true });
+                
+                galleryGrid.addEventListener('touchend', () => {
+                    startX = 0;
+                    startY = 0;
+                    currentX = 0;
+                    currentY = 0;
+                    
+                    setTimeout(() => {
+                        isSwipeDetected = false;
+                    }, 100);
+                }, { passive: true });
+                
+                // Prevent gallery modal from opening during swipe
+                galleryGrid.addEventListener('click', (e) => {
+                    if (isSwipeDetected) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                    }
+                });
+            }
+        });
+        
+        // ===== Optimized Image Loading =====
+        document.addEventListener('DOMContentLoaded', () => {
+            const images = document.querySelectorAll('img[loading="lazy"]');
+            
+            // Intersection Observer for better lazy loading
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.classList.add('loaded');
+                        observer.unobserve(img);
+                    }
+                });
+            }, {
+                rootMargin: '50px 0px',
+                threshold: 0.1
+            });
+            
+            images.forEach(img => {
+                imageObserver.observe(img);
+            });
+        });
+        
+        // ===== Keyboard Navigation Support =====
+        document.addEventListener('DOMContentLoaded', () => {
+            // Add keyboard navigation for interactive elements
+            const interactiveElements = document.querySelectorAll('button, .btn, .nav-link, .gallery-item, .filter-btn');
+            
+            interactiveElements.forEach(element => {
+                element.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        element.click();
+                    }
+                });
+            });
+        });
+        
+        // ===== Booking System Functionality =====
+        document.addEventListener('DOMContentLoaded', () => {
+            // Booking form elements
+            const bookingForm = document.getElementById('bookingForm');
+            const checkinInput = document.getElementById('checkin');
+            const checkoutInput = document.getElementById('checkout');
+            const roomTypeSelect = document.getElementById('roomType');
+            const guestCountSpan = document.getElementById('guestCount');
+            const decreaseBtn = document.getElementById('decreaseGuests');
+            const increaseBtn = document.getElementById('increaseGuests');
+            const optionCheckboxes = document.querySelectorAll('.option-checkbox');
+            
+            // Price display elements
+            const roomPriceSpan = document.getElementById('roomPrice');
+            const optionPriceSpan = document.getElementById('optionPrice');
+            const nightCountSpan = document.getElementById('nightCount');
+            const totalPriceSpan = document.getElementById('totalPrice');
+            
+            // Modal elements
+            const bookingModal = document.getElementById('bookingModal');
+            const modalClose = document.getElementById('modalClose');
+            const editBookingBtn = document.getElementById('editBooking');
+            const confirmBookingBtn = document.getElementById('confirmBooking');
+            const bookingSummary = document.getElementById('bookingSummary');
+            
+            // Booking state
+            let bookingData = {
+                checkin: '',
+                checkout: '',
+                nights: 0,
+                roomType: '',
+                roomPrice: 0,
+                guestCount: 2,
+                guestName: '',
+                phone: '',
+                email: '',
+                options: [],
+                optionPrice: 0,
+                totalPrice: 0
+            };
+
+            // Set minimum date to today
+            const today = new Date().toISOString().split('T')[0];
+            checkinInput.min = today;
+            checkoutInput.min = today;
+            
+            // Set default checkout date (tomorrow)
+            const tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            checkoutInput.value = tomorrow.toISOString().split('T')[0];
+
+            // Guest counter functionality
+            decreaseBtn.addEventListener('click', () => {
+                if (bookingData.guestCount > 1) {
+                    bookingData.guestCount--;
+                    guestCountSpan.textContent = bookingData.guestCount;
+                    updatePricing();
+                }
+                decreaseBtn.disabled = bookingData.guestCount <= 1;
+            });
+
+            increaseBtn.addEventListener('click', () => {
+                if (bookingData.guestCount < 10) {
+                    bookingData.guestCount++;
+                    guestCountSpan.textContent = bookingData.guestCount;
+                    updatePricing();
+                }
+                increaseBtn.disabled = bookingData.guestCount >= 10;
+            });
+
+            // Date validation and night calculation
+            function validateDates() {
+                const checkin = new Date(checkinInput.value);
+                const checkout = new Date(checkoutInput.value);
+                
+                if (checkin && checkout) {
+                    if (checkout <= checkin) {
+                        const nextDay = new Date(checkin);
+                        nextDay.setDate(nextDay.getDate() + 1);
+                        checkoutInput.value = nextDay.toISOString().split('T')[0];
+                    }
+                    
+                    const timeDiff = new Date(checkoutInput.value) - new Date(checkinInput.value);
+                    const nights = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+                    bookingData.nights = nights;
+                    nightCountSpan.textContent = `${nights}박`;
+                }
+                
+                updatePricing();
+            }
+
+            checkinInput.addEventListener('change', () => {
+                bookingData.checkin = checkinInput.value;
+                checkoutInput.min = checkinInput.value;
+                validateDates();
+            });
+
+            checkoutInput.addEventListener('change', () => {
+                bookingData.checkout = checkoutInput.value;
+                validateDates();
+            });
+
+            // Room type selection
+            roomTypeSelect.addEventListener('change', () => {
+                const selectedOption = roomTypeSelect.options[roomTypeSelect.selectedIndex];
+                bookingData.roomType = roomTypeSelect.value;
+                bookingData.roomPrice = parseInt(selectedOption.getAttribute('data-price')) || 0;
+                updatePricing();
+            });
+
+            // Option checkboxes
+            optionCheckboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', () => {
+                    updateOptions();
+                    updatePricing();
+                });
+            });
+
+            function updateOptions() {
+                bookingData.options = [];
+                bookingData.optionPrice = 0;
+                
+                optionCheckboxes.forEach(checkbox => {
+                    if (checkbox.checked) {
+                        const optionName = checkbox.parentElement.querySelector('.option-name').textContent;
+                        const optionPrice = parseInt(checkbox.getAttribute('data-price'));
+                        
+                        let finalPrice = optionPrice;
+                        // Apply per-person pricing for breakfast
+                        if (checkbox.id === 'breakfast') {
+                            finalPrice = optionPrice * bookingData.guestCount;
+                        }
+                        
+                        bookingData.options.push({
+                            name: optionName,
+                            price: finalPrice
+                        });
+                        bookingData.optionPrice += finalPrice;
+                    }
+                });
+            }
+
+            function updatePricing() {
+                const roomTotal = bookingData.roomPrice * bookingData.nights;
+                const total = roomTotal + bookingData.optionPrice;
+                
+                roomPriceSpan.textContent = `${roomTotal.toLocaleString()}원`;
+                optionPriceSpan.textContent = `${bookingData.optionPrice.toLocaleString()}원`;
+                totalPriceSpan.textContent = `${total.toLocaleString()}원`;
+                
+                bookingData.totalPrice = total;
+            }
+
+            // Form submission
+            bookingForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                // Collect form data
+                bookingData.guestName = document.getElementById('guestName').value;
+                bookingData.phone = document.getElementById('phone').value;
+                bookingData.email = document.getElementById('email').value;
+                bookingData.checkin = checkinInput.value;
+                bookingData.checkout = checkoutInput.value;
+                
+                if (validateBookingData()) {
+                    showBookingModal();
+                }
+            });
+
+            function validateBookingData() {
+                if (!bookingData.checkin || !bookingData.checkout) {
+                    alert('체크인/체크아웃 날짜를 선택해주세요.');
+                    return false;
+                }
+                
+                if (!bookingData.roomType) {
+                    alert('객실 타입을 선택해주세요.');
+                    return false;
+                }
+                
+                if (!bookingData.guestName.trim()) {
+                    alert('예약자명을 입력해주세요.');
+                    return false;
+                }
+                
+                if (!bookingData.phone.trim()) {
+                    alert('연락처를 입력해주세요.');
+                    return false;
+                }
+                
+                return true;
+            }
+
+            function showBookingModal() {
+                // Generate booking summary
+                const roomTypeText = roomTypeSelect.options[roomTypeSelect.selectedIndex].text;
+                const checkinDate = new Date(bookingData.checkin).toLocaleDateString('ko-KR');
+                const checkoutDate = new Date(bookingData.checkout).toLocaleDateString('ko-KR');
+                
+                let summaryHTML = `
+                    <div class="summary-item">
+                        <span>예약자명</span>
+                        <span>${bookingData.guestName}</span>
+                    </div>
+                    <div class="summary-item">
+                        <span>연락처</span>
+                        <span>${bookingData.phone}</span>
+                    </div>
+                    <div class="summary-item">
+                        <span>체크인</span>
+                        <span>${checkinDate}</span>
+                    </div>
+                    <div class="summary-item">
+                        <span>체크아웃</span>
+                        <span>${checkoutDate}</span>
+                    </div>
+                    <div class="summary-item">
+                        <span>객실 타입</span>
+                        <span>${roomTypeText}</span>
+                    </div>
+                    <div class="summary-item">
+                        <span>투숙 인원</span>
+                        <span>${bookingData.guestCount}명</span>
+                    </div>
+                    <div class="summary-item">
+                        <span>숙박 기간</span>
+                        <span>${bookingData.nights}박</span>
+                    </div>
+                `;
+                
+                if (bookingData.options.length > 0) {
+                    summaryHTML += `<div class="summary-item"><span>추가 옵션</span><span></span></div>`;
+                    bookingData.options.forEach(option => {
+                        summaryHTML += `
+                            <div class="summary-item" style="margin-left: 1rem; font-size: 0.9rem;">
+                                <span>• ${option.name}</span>
+                                <span>${option.price.toLocaleString()}원</span>
+                            </div>
+                        `;
+                    });
+                }
+                
+                summaryHTML += `
+                    <div class="summary-item">
+                        <span><strong>총 결제 금액</strong></span>
+                        <span><strong>${bookingData.totalPrice.toLocaleString()}원</strong></span>
+                    </div>
+                `;
+                
+                bookingSummary.innerHTML = summaryHTML;
+                bookingModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            // Modal close functionality
+            function closeModal() {
+                bookingModal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+
+            modalClose.addEventListener('click', closeModal);
+            editBookingBtn.addEventListener('click', closeModal);
+
+            bookingModal.addEventListener('click', (e) => {
+                if (e.target === bookingModal) {
+                    closeModal();
+                }
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && bookingModal.classList.contains('active')) {
+                    closeModal();
+                }
+            });
+
+            // Confirm booking
+            confirmBookingBtn.addEventListener('click', () => {
+                // In a real application, this would send data to a server
+                alert('예약이 접수되었습니다!\n\n확인 후 연락드리겠습니다.\n감사합니다! 😊');
+                closeModal();
+                bookingForm.reset();
+                bookingData.guestCount = 2;
+                guestCountSpan.textContent = '2';
+                updatePricing();
+            });
+
+            // Initialize pricing
+            updatePricing();
+
+            // Add hover effects to booking elements
+            const bookingElements = document.querySelectorAll('.date-input, .form-input, .form-select');
+            bookingElements.forEach(element => {
+                element.addEventListener('focus', () => {
+                    element.parentElement.style.transform = 'translateY(-2px)';
+                });
+                
+                element.addEventListener('blur', () => {
+                    element.parentElement.style.transform = 'translateY(0)';
+                });
+            });
+
+            // Add animation to price updates
+            function animatePrice(element) {
+                element.style.transform = 'scale(1.05)';
+                element.style.color = 'var(--soft-moss)';
+                setTimeout(() => {
+                    element.style.transform = 'scale(1)';
+                    element.style.color = 'var(--soft-black)';
+                }, 300);
+            }
+
+            const priceElements = [roomPriceSpan, optionPriceSpan, totalPriceSpan];
+            priceElements.forEach(element => {
+                const observer = new MutationObserver(() => {
+                    animatePrice(element);
+                });
+                observer.observe(element, { childList: true });
             });
         });
     </script>
