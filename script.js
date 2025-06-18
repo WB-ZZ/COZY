@@ -73,8 +73,37 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// Stats section - keep original values without animation interference
-// Disabled counter animation to prevent stat corruption
+// Stats section - completely disable any counter animations
+document.addEventListener('DOMContentLoaded', () => {
+    // Force stats to show correct values and prevent any interference
+    const statNumbers = document.querySelectorAll('.stat-number');
+    if (statNumbers.length >= 4) {
+        statNumbers[0].textContent = '500+';
+        statNumbers[1].textContent = '87%';
+        statNumbers[2].textContent = '12';
+        statNumbers[3].textContent = '4.8★';
+    }
+    
+    // Prevent any counter animations by observing changes
+    const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+            if (mutation.type === 'childList' || mutation.type === 'characterData') {
+                const target = mutation.target;
+                if (target.classList && target.classList.contains('stat-number')) {
+                    const index = Array.from(statNumbers).indexOf(target);
+                    const correctValues = ['500+', '87%', '12', '4.8★'];
+                    if (index >= 0 && target.textContent !== correctValues[index]) {
+                        target.textContent = correctValues[index];
+                    }
+                }
+            }
+        });
+    });
+    
+    statNumbers.forEach(stat => {
+        observer.observe(stat, { childList: true, characterData: true, subtree: true });
+    });
+});
 
 // Add some interactive hover effects
 document.querySelectorAll('.feature-card').forEach(card => {
