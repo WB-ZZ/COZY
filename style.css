@@ -1,6 +1,23 @@
 /* ===== 모던 럭셔리 펜션 디자인 시스템 ===== */
 :root {
-    /* 프리미엄 펜션 브랜드 색상 */
+    /* 기존 색상 변수 유지 */
+    --paper-white: #FEFEFE;
+    --warm-cream: #FBF8F3;
+    --soft-sand: #F7F2E8;
+    --natural-beige: #F0E6D2;
+    --gentle-stone: #EAE0D5;
+    --cozy-wood: #E8DDD2;
+    --autumn-mist: #F4F0E8;
+    --forest-whisper: #E7EDE7;
+    
+    /* 기존 텍스트 색상 */
+    --deep-brown: #2D1810;
+    --warm-gray: #5D4E43;
+    --soft-charcoal: #3A312B;
+    --muted-brown: #6B5B50;
+    --pure-white: #FFFFFF;
+    
+    /* 새로운 프리미엄 색상 */
     --primary-dark: #1a1611;
     --primary-brown: #2d1810;
     --primary-warm: #4a3426;
@@ -60,8 +77,8 @@ body {
     font-weight: 400;
     line-height: 1.7;
     letter-spacing: -0.01em;
-    color: var(--text-primary);
-    background: var(--bg-primary);
+    color: var(--deep-brown);
+    background: var(--paper-white);
     overflow-x: hidden;
     font-feature-settings: "liga" 1, "kern" 1, "frac" 1;
     text-rendering: optimizeLegibility;
@@ -210,7 +227,7 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     font-size: clamp(3.5rem, 7vw, 6rem);
     font-weight: 900;
-    color: var(--text-light);
+    color: var(--pure-white);
     margin-bottom: 2rem;
     line-height: 1.0;
     letter-spacing: -0.04em;
@@ -473,7 +490,7 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     font-size: 1.6rem;
     font-weight: 700;
-    color: var(--text-primary);
+    color: var(--deep-brown);
     margin-bottom: 1.5rem;
     letter-spacing: -0.02em;
     position: relative;
@@ -497,7 +514,7 @@ body {
 }
 
 .feature-description {
-    color: var(--text-muted);
+    color: var(--warm-gray);
     line-height: 1.8;
     font-weight: 400;
     font-size: 1.05rem;
@@ -642,7 +659,7 @@ body {
 }
 
 .gallery .section-title {
-    color: var(--text-light);
+    color: var(--pure-white);
     text-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
 
