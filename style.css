@@ -1,21 +1,22 @@
 /* ===== 모던 럭셔리 펜션 디자인 시스템 ===== */
 :root {
-    /* 따뜻한 아늑함 색상 팔레트 */
-    --paper-white: #FEFEFE;
-    --warm-cream: #FBF8F3;
-    --soft-sand: #F7F2E8;
-    --natural-beige: #F0E6D2;
-    --gentle-stone: #EAE0D5;
-    --cozy-wood: #E8DDD2;
-    --autumn-mist: #F4F0E8;
-    --forest-whisper: #E7EDE7;
+    /* 프리미엄 펜션 브랜드 색상 */
+    --primary-dark: #1a1611;
+    --primary-brown: #2d1810;
+    --primary-warm: #4a3426;
+    --accent-gold: #d4af37;
+    --accent-soft: #f5f1e8;
     
-    /* 따뜻한 텍스트 색상 */
-    --deep-brown: #2D1810;
-    --warm-gray: #5D4E43;
-    --soft-charcoal: #3A312B;
-    --muted-brown: #6B5B50;
-    --pure-white: #FFFFFF;
+    /* 배경 그라데이션 */
+    --bg-primary: #fefefe;
+    --bg-secondary: #f8f6f3;
+    --bg-accent: #f2f0ec;
+    
+    /* 텍스트 계층 */
+    --text-primary: #1a1611;
+    --text-secondary: #4a3426;
+    --text-muted: #8b7355;
+    --text-light: #ffffff;
     
     /* 아늑한 그라데이션 */
     --gradient-sunset: linear-gradient(135deg, var(--warm-cream) 0%, var(--soft-sand) 100%);
@@ -55,14 +56,14 @@
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', 'Helvetica Neue', Arial, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', system-ui, sans-serif;
     font-weight: 400;
-    line-height: 1.6;
+    line-height: 1.7;
     letter-spacing: -0.01em;
-    color: var(--deep-brown);
-    background: var(--paper-white);
+    color: var(--text-primary);
+    background: var(--bg-primary);
     overflow-x: hidden;
-    font-feature-settings: "liga" 1, "kern" 1;
+    font-feature-settings: "liga" 1, "kern" 1, "frac" 1;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -122,17 +123,33 @@ body {
     border-bottom-color: var(--soft-charcoal);
 }
 
-/* ===== 히어로 섹션 ===== */
+/* ===== 몰입감 있는 히어로 섹션 ===== */
 .hero {
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.4)), 
-                url('https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2000&q=80') center/cover;
+    background: 
+        linear-gradient(135deg, rgba(26,22,17,0.6) 0%, rgba(74,52,38,0.4) 100%),
+        url('https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2000&q=80') center/cover;
     position: relative;
     overflow: hidden;
     background-attachment: fixed;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(
+        ellipse at center bottom,
+        rgba(212, 175, 55, 0.1) 0%,
+        transparent 70%
+    );
+    pointer-events: none;
 }
 
 .hero::before {
@@ -193,11 +210,14 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     font-size: clamp(3.5rem, 7vw, 6rem);
     font-weight: 900;
-    color: var(--pure-white);
+    color: var(--text-light);
     margin-bottom: 2rem;
     line-height: 1.0;
     letter-spacing: -0.04em;
-    text-shadow: 0 4px 20px rgba(0,0,0,0.7), 0 2px 8px rgba(0,0,0,0.5);
+    text-shadow: 
+        0 4px 20px rgba(0,0,0,0.8), 
+        0 2px 8px rgba(0,0,0,0.6),
+        0 1px 3px rgba(0,0,0,0.4);
 }
 
 .hero-subtitle {
@@ -324,8 +344,9 @@ body {
     font-size: clamp(2.5rem, 5vw, 3.5rem);
     font-weight: 800;
     color: var(--deep-brown);
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
     letter-spacing: -0.03em;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.05);
 }
 
 .section-subtitle {
@@ -339,36 +360,58 @@ body {
     margin-right: auto;
 }
 
-/* ===== 혁신적인 피처 섹션 ===== */
+/* ===== 체험 스토리 섹션 ===== */
 .features {
-    padding: 0;
-    background: transparent;
+    padding: 12rem 0;
+    background: 
+        linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 50%, var(--bg-accent) 100%);
     position: relative;
-    margin: -10rem 0 10rem;
+    overflow: hidden;
+}
+
+.features::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: 
+        radial-gradient(circle at 30% 40%, rgba(212, 175, 55, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 70% 80%, rgba(26, 22, 17, 0.02) 0%, transparent 50%);
+    animation: subtle-float 20s ease-in-out infinite;
+}
+
+@keyframes subtle-float {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    33% { transform: translate(-10px, -10px) rotate(0.5deg); }
+    66% { transform: translate(10px, -5px) rotate(-0.5deg); }
 }
 
 .features-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
+    gap: 3rem;
+    max-width: 1400px;
+    margin: 4rem auto 0;
     padding: 0 2rem;
 }
 
 .feature-card {
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(20px);
-    padding: 3rem 2.5rem;
+    padding: 4rem 3rem;
     border-radius: 24px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-    transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: 
+        0 20px 40px rgba(26, 22, 17, 0.08),
+        0 8px 16px rgba(26, 22, 17, 0.04);
+    transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
     text-align: center;
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(212, 175, 55, 0.1);
     transform: translateY(40px);
     opacity: 0;
     position: relative;
-    overflow: hidden;
+    z-index: 2;
 }
 
 .feature-card.visible {
@@ -384,62 +427,81 @@ body {
 .feature-card:nth-child(6) { transition-delay: 0.6s; }
 
 .feature-card:hover {
-    transform: translateY(-20px) scale(1.03);
-    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
-    border-color: rgba(255, 255, 255, 0.6);
-}
-
-.feature-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-    transition: left 0.6s ease;
-    z-index: 1;
-}
-
-.feature-card:hover::before {
-    left: 100%;
+    transform: translateY(-12px) scale(1.02);
+    box-shadow: 
+        0 32px 64px rgba(26, 22, 17, 0.12),
+        0 16px 32px rgba(212, 175, 55, 0.1);
+    border-color: rgba(212, 175, 55, 0.3);
 }
 
 .feature-icon {
     width: 80px;
     height: 80px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-warm) 100%);
     border-radius: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto 2rem;
+    margin: 0 auto 3rem;
     font-size: 2rem;
-    color: var(--white);
-    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    color: var(--accent-gold);
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    box-shadow: 
+        0 12px 30px rgba(26, 22, 17, 0.15),
+        inset 0 1px 0 rgba(212, 175, 55, 0.2);
     position: relative;
-    z-index: 2;
-    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+}
+
+.feature-icon::before {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    right: 2px;
+    bottom: 2px;
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, transparent 100%);
+    border-radius: 18px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.feature-card:hover .feature-icon::before {
+    opacity: 1;
 }
 
 .feature-title {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     font-weight: 700;
-    color: var(--deep-brown);
-    margin-bottom: 1rem;
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
     letter-spacing: -0.02em;
     position: relative;
-    z-index: 2;
+}
+
+.feature-title::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.feature-card:hover .feature-title::after {
+    opacity: 1;
 }
 
 .feature-description {
-    color: var(--warm-gray);
-    line-height: 1.7;
+    color: var(--text-muted);
+    line-height: 1.8;
     font-weight: 400;
-    position: relative;
-    z-index: 2;
-    font-size: 0.95rem;
+    font-size: 1.05rem;
+    margin-bottom: 2rem;
 }
 
 /* ===== About 섹션 ===== */
@@ -551,11 +613,12 @@ body {
     }
 }
 
-/* ===== 갤러리 섹션 ===== */
+/* ===== 몰입형 갤러리 섹션 ===== */
 .gallery {
-    padding: 10rem 0;
-    background: linear-gradient(135deg, var(--paper-white) 0%, var(--warm-cream) 50%, var(--soft-sand) 100%);
+    padding: 12rem 0;
+    background: var(--primary-dark);
     position: relative;
+    overflow: hidden;
 }
 
 .gallery::before {
@@ -565,9 +628,9 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M10,30 Q30,10 50,30 T90,30" stroke="rgba(45,24,16,0.03)" stroke-width="0.5" fill="none"/><path d="M10,70 Q30,50 50,70 T90,70" stroke="rgba(93,78,67,0.05)" stroke-width="0.3" fill="none"/></svg>');
-    background-size: 200px 100px;
-    opacity: 0.4;
+    background: 
+        radial-gradient(ellipse at top left, rgba(212, 175, 55, 0.05) 0%, transparent 50%),
+        radial-gradient(ellipse at bottom right, rgba(74, 52, 38, 0.1) 0%, transparent 50%);
 }
 
 .gallery-container {
@@ -576,6 +639,11 @@ body {
     padding: 0 2rem;
     position: relative;
     z-index: 2;
+}
+
+.gallery .section-title {
+    color: var(--text-light);
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
 
 .gallery-filters {

@@ -73,9 +73,43 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// Stats section - completely disable any counter animations
+// Gallery filter functionality
 document.addEventListener('DOMContentLoaded', () => {
-    // Force stats to show correct values and prevent any interference
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    
+    filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const filter = button.getAttribute('data-filter');
+            
+            // Update active button
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+            
+            // Filter gallery items with smooth animation
+            galleryItems.forEach((item, index) => {
+                const category = item.getAttribute('data-category');
+                
+                if (filter === 'all' || category === filter) {
+                    item.style.display = 'block';
+                    item.style.transition = 'all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+                    setTimeout(() => {
+                        item.style.opacity = '1';
+                        item.style.transform = 'scale(1) translateY(0)';
+                    }, index * 50);
+                } else {
+                    item.style.transition = 'all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+                    item.style.opacity = '0';
+                    item.style.transform = 'scale(0.9) translateY(20px)';
+                    setTimeout(() => {
+                        item.style.display = 'none';
+                    }, 400);
+                }
+            });
+        });
+    });
+    
+    // Stats section - force correct values
     const statNumbers = document.querySelectorAll('.stat-number');
     if (statNumbers.length >= 4) {
         statNumbers[0].textContent = '500+';
@@ -83,26 +117,6 @@ document.addEventListener('DOMContentLoaded', () => {
         statNumbers[2].textContent = '12';
         statNumbers[3].textContent = '4.8★';
     }
-    
-    // Prevent any counter animations by observing changes
-    const observer = new MutationObserver((mutations) => {
-        mutations.forEach((mutation) => {
-            if (mutation.type === 'childList' || mutation.type === 'characterData') {
-                const target = mutation.target;
-                if (target.classList && target.classList.contains('stat-number')) {
-                    const index = Array.from(statNumbers).indexOf(target);
-                    const correctValues = ['500+', '87%', '12', '4.8★'];
-                    if (index >= 0 && target.textContent !== correctValues[index]) {
-                        target.textContent = correctValues[index];
-                    }
-                }
-            }
-        });
-    });
-    
-    statNumbers.forEach(stat => {
-        observer.observe(stat, { childList: true, characterData: true, subtree: true });
-    });
 });
 
 // Add some interactive hover effects
