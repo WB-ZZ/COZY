@@ -81,6 +81,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const filterButtons = document.querySelectorAll('.filter-btn');
     const galleryItems = document.querySelectorAll('.gallery-item');
     
+    // Initialize gallery items
+    galleryItems.forEach(item => {
+        item.style.opacity = '1';
+        item.style.transform = 'perspective(1000px) rotateX(1deg)';
+        item.style.display = 'block';
+    });
+    
     filterButtons.forEach(button => {
         button.addEventListener('click', () => {
             const filter = button.getAttribute('data-filter');
@@ -113,13 +120,53 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
     
-    // Stats section - force correct values
-    const statNumbers = document.querySelectorAll('.stat-number');
-    if (statNumbers.length >= 4) {
-        statNumbers[0].textContent = '500+';
-        statNumbers[1].textContent = '87%';
-        statNumbers[2].textContent = '12';
-        statNumbers[3].textContent = '4.8★';
+    // Stats counter animation
+    const animateCounter = (element, target, duration = 2000) => {
+        const start = 0;
+        const increment = target / (duration / 16);
+        let current = start;
+        
+        const timer = setInterval(() => {
+            current += increment;
+            if (current >= target) {
+                current = target;
+                clearInterval(timer);
+            }
+            element.textContent = Math.floor(current);
+            
+            // Add suffix based on element
+            const parent = element.parentElement;
+            if (parent && parent.textContent.includes('투숙객')) {
+                element.textContent = Math.floor(current) + '+';
+            } else if (parent && parent.textContent.includes('만족도')) {
+                element.textContent = Math.floor(current) + '%';
+            } else if (parent && parent.textContent.includes('평점')) {
+                element.textContent = '4.8★';
+            }
+        }, 16);
+    };
+    
+    // Observe stats section for animation
+    const statsObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const statNumbers = entry.target.querySelectorAll('.stat-number');
+                statNumbers.forEach((stat, index) => {
+                    setTimeout(() => {
+                        if (index === 0) animateCounter(stat, 500);
+                        else if (index === 1) animateCounter(stat, 87);
+                        else if (index === 2) animateCounter(stat, 12);
+                        else if (index === 3) stat.textContent = '4.8★';
+                    }, index * 200);
+                });
+                statsObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.5 });
+    
+    const statsSection = document.querySelector('.stats');
+    if (statsSection) {
+        statsObserver.observe(statsSection);
     }
 });
 
