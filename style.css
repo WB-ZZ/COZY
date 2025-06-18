@@ -1,30 +1,33 @@
 /* ===== CSS Variables ===== */
 :root {
-    /* 따뜻한 색상 팔레트 */
-    --warm-cream: #FFF8F0;
-    --soft-peach: #FFE5D9;
-    --gentle-coral: #FFCDB2;
-    --warm-terracotta: #FFB3A7;
-    --sunset-orange: #FF9F7A;
-    --dusty-rose: #E8A598;
-    --sage-green: #A8DADC;
-    --soft-lavender: #F1FAEE;
+    /* 자연스럽고 아늑한 펜션 색상 팔레트 */
+    --warm-cream: #FAF7F2;
+    --soft-beige: #F5F1E8;
+    --natural-brown: #D7CCC8;
+    --warm-wood: #A1887F;
+    --forest-green: #81C784;
+    --sage-green: #A5D6A7;
+    --earth-brown: #8D6E63;
+    --cozy-orange: #FFAB91;
+    --sunset-glow: #FFCC80;
+    --morning-mist: #F0F4C3;
     
     /* 텍스트 색상 */
-    --warm-gray: #6B5B73;
-    --soft-black: #2D3436;
-    --light-gray: #DDD6E0;
+    --warm-gray: #5D4E37;
+    --soft-black: #3E2723;
+    --light-gray: #BCAAA4;
     --white: #FFFFFF;
     
-    /* 그라데이션 */
-    --gradient-warm: linear-gradient(135deg, var(--soft-peach) 0%, var(--gentle-coral) 100%);
-    --gradient-sunset: linear-gradient(135deg, var(--sunset-orange) 0%, var(--dusty-rose) 100%);
-    --gradient-soft: linear-gradient(135deg, var(--soft-lavender) 0%, var(--sage-green) 100%);
+    /* 자연 그라데이션 */
+    --gradient-warm: linear-gradient(135deg, var(--soft-beige) 0%, var(--natural-brown) 100%);
+    --gradient-nature: linear-gradient(135deg, var(--forest-green) 0%, var(--sage-green) 100%);
+    --gradient-sunset: linear-gradient(135deg, var(--cozy-orange) 0%, var(--sunset-glow) 100%);
+    --gradient-soft: linear-gradient(135deg, var(--morning-mist) 0%, var(--sage-green) 100%);
     
-    /* 그림자 */
-    --shadow-soft: 0 8px 32px rgba(255, 159, 122, 0.15);
-    --shadow-hover: 0 16px 48px rgba(255, 159, 122, 0.25);
-    --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.05);
+    /* 자연스러운 그림자 */
+    --shadow-soft: 0 8px 32px rgba(161, 136, 127, 0.15);
+    --shadow-hover: 0 16px 48px rgba(161, 136, 127, 0.25);
+    --shadow-card: 0 4px 20px rgba(62, 39, 35, 0.08);
 }
 
 /* ===== Reset & Base ===== */
@@ -71,15 +74,9 @@ body {
     font-family: 'Comfortaa', sans-serif;
     font-size: 1.8rem;
     font-weight: 700;
-    color: var(--sunset-orange);
+    color: var(--earth-brown);
     text-decoration: none;
     position: relative;
-}
-
-.logo::after {
-    content: '✨';
-    margin-left: 0.5rem;
-    animation: sparkle 2s ease-in-out infinite;
 }
 
 @keyframes sparkle {
@@ -104,8 +101,8 @@ body {
 }
 
 .nav-link:hover {
-    color: var(--sunset-orange);
-    background: var(--soft-peach);
+    color: var(--earth-brown);
+    background: var(--soft-beige);
     transform: translateY(-2px);
 }
 
@@ -197,11 +194,11 @@ body {
 .btn-secondary {
     background: var(--white);
     color: var(--warm-gray);
-    border: 2px solid var(--gentle-coral);
+    border: 2px solid var(--natural-brown);
 }
 
 .btn-secondary:hover {
-    background: var(--soft-peach);
+    background: var(--soft-beige);
     transform: translateY(-3px);
 }
 
@@ -262,7 +259,7 @@ body {
     left: 0;
     right: 0;
     height: 4px;
-    background: var(--gradient-sunset);
+    background: var(--gradient-nature);
     transform: scaleX(0);
     transition: transform 0.3s ease;
 }
@@ -279,14 +276,14 @@ body {
 .feature-icon {
     width: 80px;
     height: 80px;
-    background: var(--gradient-warm);
+    background: var(--gradient-nature);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 0 auto 1.5rem;
     font-size: 2rem;
-    color: var(--sunset-orange);
+    color: var(--white);
     transition: all 0.3s ease;
 }
 
@@ -323,7 +320,7 @@ body {
     font-family: 'Comfortaa', sans-serif;
     font-size: 3rem;
     font-weight: 700;
-    color: var(--sunset-orange);
+    color: var(--earth-brown);
     display: block;
     margin-bottom: 0.5rem;
 }
@@ -378,18 +375,18 @@ body {
 }
 
 .portfolio-placeholder.cafe {
-    background: linear-gradient(135deg, #D4A574 0%, #C8956D 100%);
+    background: linear-gradient(135deg, var(--forest-green) 0%, var(--sage-green) 100%);
     color: var(--white);
 }
 
 .portfolio-placeholder.flower {
-    background: linear-gradient(135deg, #98D8C8 0%, #7FB3D3 100%);
+    background: linear-gradient(135deg, var(--cozy-orange) 0%, var(--sunset-glow) 100%);
     color: var(--white);
 }
 
 .portfolio-placeholder.bakery {
-    background: linear-gradient(135deg, #F7DC6F 0%, #F4D03F 100%);
-    color: var(--soft-black);
+    background: linear-gradient(135deg, var(--warm-wood) 0%, var(--earth-brown) 100%);
+    color: var(--white);
 }
 
 .portfolio-placeholder i {
@@ -420,8 +417,8 @@ body {
 }
 
 .tag {
-    background: var(--soft-peach);
-    color: var(--sunset-orange);
+    background: var(--soft-beige);
+    color: var(--earth-brown);
     padding: 0.3rem 0.8rem;
     border-radius: 15px;
     font-size: 0.8rem;

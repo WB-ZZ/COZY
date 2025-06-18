@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CozySpace - 따뜻한 디지털 공간</title>
+    <title>코지 펜션 - 자연 속 아늑한 휴식</title>
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,16 +13,482 @@
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <link rel="stylesheet" href="style.css">
+    <style>
+        /* ===== CSS Variables ===== */
+        :root {
+            /* 수채화 톤 색상 팔레트 */
+            --paper-white: #FEFEFE;
+            --cloud-gray: #F8F9FA;
+            --mist-blue: #E8F2F5;
+            --sage-wash: #D4E6E1;
+            --lavender-mist: #E8E5F0;
+            --warm-stone: #F0ECE8;
+            --earth-beige: #EDE7E0;
+            --soft-moss: #D8E2DC;
+            
+            /* 텍스트 색상 */
+            --charcoal: #4A4A4A;
+            --slate-gray: #6B7280;
+            --soft-black: #2F2F2F;
+            --muted-gray: #9CA3AF;
+            --white: #FFFFFF;
+            
+            /* 그라데이션 */
+            --gradient-sky: linear-gradient(135deg, var(--mist-blue) 0%, var(--cloud-gray) 100%);
+            --gradient-earth: linear-gradient(135deg, var(--warm-stone) 0%, var(--earth-beige) 100%);
+            --gradient-nature: linear-gradient(135deg, var(--sage-wash) 0%, var(--soft-moss) 100%);
+            
+            /* 그림자 */
+            --shadow-soft: 0 4px 20px rgba(75, 85, 99, 0.08);
+            --shadow-hover: 0 8px 30px rgba(75, 85, 99, 0.12);
+        }
+        
+        /* ===== Reset & Base ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Noto Sans KR', 'Comfortaa', sans-serif;
+            font-weight: 400;
+            line-height: 1.7;
+            letter-spacing: -0.02em;
+            color: var(--charcoal);
+            background: var(--paper-white);
+            overflow-x: hidden;
+        }
+        
+        /* ===== Header ===== */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1rem 0;
+            background: rgba(254, 254, 254, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(212, 230, 225, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Comfortaa', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--slate-gray);
+            text-decoration: none;
+            position: relative;
+        }
+        
+        .logo::after {
+            content: '🏡';
+            margin-left: 0.5rem;
+            opacity: 0.8;
+        }
+        
+        @keyframes sparkle {
+            0%, 100% { opacity: 0.7; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        .nav-link {
+            color: var(--warm-gray);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-link:hover {
+            color: var(--sunset-orange);
+            background: var(--soft-peach);
+            transform: translateY(-2px);
+        }
+        
+        /* ===== Hero Section ===== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--gradient-warm);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="25" cy="25" r="2" fill="rgba(255,159,122,0.1)"/><circle cx="75" cy="75" r="1.5" fill="rgba(232,165,152,0.15)"/><circle cx="50" cy="10" r="1" fill="rgba(168,218,220,0.1)"/></svg>');
+            animation: float 20s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+        
+        .hero-content {
+            text-align: center;
+            max-width: 800px;
+            padding: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero-title {
+            font-family: 'Comfortaa', sans-serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            color: var(--soft-black);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+        
+        .hero-subtitle {
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            color: var(--warm-gray);
+            margin-bottom: 2.5rem;
+            font-weight: 300;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-primary {
+            background: var(--gradient-sunset);
+            color: var(--white);
+            box-shadow: var(--shadow-soft);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .btn-secondary {
+            background: var(--white);
+            color: var(--warm-gray);
+            border: 2px solid var(--gentle-coral);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--soft-peach);
+            transform: translateY(-3px);
+        }
+        
+        /* ===== Features Section ===== */
+        .features {
+            padding: 5rem 0;
+            background: var(--white);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-family: 'Comfortaa', sans-serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            color: var(--soft-black);
+            margin-bottom: 3rem;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+        
+        .feature-card {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 25px;
+            box-shadow: var(--shadow-soft);
+            transition: all 0.3s ease;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-sunset);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-warm);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            color: var(--sunset-orange);
+        }
+        
+        .feature-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--soft-black);
+            margin-bottom: 1rem;
+        }
+        
+        .feature-description {
+            color: var(--warm-gray);
+            line-height: 1.6;
+        }
+        
+        /* ===== Stats Section ===== */
+        .stats {
+            padding: 5rem 0;
+            background: var(--gradient-soft);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+        
+        .stat-item {
+            padding: 2rem;
+        }
+        
+        .stat-number {
+            font-family: 'Comfortaa', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--sunset-orange);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            font-size: 1.1rem;
+            color: var(--warm-gray);
+            font-weight: 500;
+        }
+        
+        /* ===== CTA Section ===== */
+        .cta {
+            padding: 5rem 0;
+            background: var(--white);
+            text-align: center;
+        }
+        
+        .cta-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .cta-title {
+            font-family: 'Comfortaa', sans-serif;
+            font-size: clamp(2rem, 4vw, 2.5rem);
+            font-weight: 700;
+            color: var(--soft-black);
+            margin-bottom: 1.5rem;
+        }
+        
+        .cta-subtitle {
+            font-size: 1.2rem;
+            color: var(--warm-gray);
+            margin-bottom: 2.5rem;
+        }
+        
+        /* ===== Footer ===== */
+        .footer {
+            background: var(--soft-black);
+            color: var(--light-gray);
+            padding: 3rem 0 1.5rem;
+            text-align: center;
+        }
+        
+        .footer-content {
+            margin-bottom: 2rem;
+        }
+        
+        .footer-logo {
+            font-family: 'Comfortaa', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--sunset-orange);
+            margin-bottom: 1rem;
+        }
+        
+        .footer-text {
+            color: var(--light-gray);
+            margin-bottom: 1.5rem;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .social-link {
+            width: 45px;
+            height: 45px;
+            background: var(--gradient-sunset);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-link:hover {
+            transform: translateY(-3px) scale(1.1);
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(221, 214, 224, 0.2);
+            padding-top: 1.5rem;
+            font-size: 0.9rem;
+            color: var(--light-gray);
+        }
+        
+        /* ===== Responsive Design ===== */
+        @media (max-width: 768px) {
+            .nav-menu {
+                gap: 1rem;
+            }
+            
+            .nav-link {
+                padding: 0.3rem 0.8rem;
+                font-size: 0.9rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 280px;
+                justify-content: center;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .feature-card {
+                padding: 2rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+        }
+        
+        /* ===== Animation Classes ===== */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* ===== Floating Animation ===== */
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+    </style>
 </head>
 <body>
     <!-- Header -->
     <header class="header">
         <nav class="nav-container">
-            <a href="#" class="logo">CozySpace</a>
+            <a href="#" class="logo">코지 펜션</a>
             <ul class="nav-menu">
                 <li><a href="#home" class="nav-link">홈</a></li>
-                <li><a href="#features" class="nav-link">서비스</a></li>
+                <li><a href="#features" class="nav-link">객실/시설</a></li>
                 <li><a href="#about" class="nav-link">소개</a></li>
                 <li><a href="#contact" class="nav-link">연락처</a></li>
             </ul>
@@ -32,16 +498,16 @@
     <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="hero-content">
-            <h1 class="hero-title fade-in">따뜻한 디지털 공간을<br>만들어드려요 🌟</h1>
-            <p class="hero-subtitle fade-in">당신의 아이디어를 포근하고 아름다운 웹사이트로 만나보세요.<br>젊은 감성과 따뜻한 감정이 담긴 특별한 공간을 제공합니다.</p>
+            <h1 class="hero-title fade-in">자연 속 아늑한 휴식공간<br>코지 펜션에 오세요 🌟</h1>
+            <p class="hero-subtitle fade-in">산과 바다가 어우러진 자연 속에서 특별한 추억을 만들어보세요.<br>따뜻한 환대와 편안한 시설로 완벽한 휴식을 선사합니다.</p>
             <div class="hero-buttons">
                 <a href="#contact" class="btn btn-primary">
-                    <i class="fas fa-heart"></i>
-                    시작하기
+                    <i class="fas fa-calendar-check"></i>
+                    예약하기
                 </a>
                 <a href="#features" class="btn btn-secondary">
                     <i class="fas fa-eye"></i>
-                    둘러보기
+                    객실보기
                 </a>
             </div>
         </div>
@@ -50,54 +516,54 @@
     <!-- Features Section -->
     <section id="features" class="features">
         <div class="container">
-            <h2 class="section-title fade-in">💫 특별한 경험을 제공해요</h2>
+            <h2 class="section-title fade-in">💫 특별한 객실과 시설을 만나보세요</h2>
             <div class="features-grid">
                 <div class="feature-card fade-in">
                     <div class="feature-icon floating">
-                        <i class="fas fa-palette"></i>
+                        <i class="fas fa-bed"></i>
                     </div>
-                    <h3 class="feature-title">감성적인 디자인</h3>
-                    <p class="feature-description">따뜻하고 포근한 색감으로 마음을 편안하게 만드는 디자인을 만들어드려요. 젊은 세대가 좋아하는 트렌디한 감성을 담았습니다.</p>
+                    <h3 class="feature-title">프리미엄 객실</h3>
+                    <p class="feature-description">따뜻하고 포근한 인테리어로 꾸며진 프리미엄 객실입니다. 자연을 느낄 수 있는 큰 창문과 편안한 침구로 최고의 휴식을 제공합니다.</p>
                 </div>
                 
                 <div class="feature-card fade-in">
                     <div class="feature-icon floating">
-                        <i class="fas fa-mobile-alt"></i>
+                        <i class="fas fa-hot-tub"></i>
                     </div>
-                    <h3 class="feature-title">모바일 퍼스트</h3>
-                    <p class="feature-description">스마트폰에서 더욱 아름답게 보이는 반응형 웹사이트를 제작합니다. 터치 친화적인 인터페이스로 최고의 사용자 경험을 선사해요.</p>
+                    <h3 class="feature-title">스파 & 찜질방</h3>
+                    <p class="feature-description">천연 온천수를 이용한 스파 시설과 전통 찜질방을 운영합니다. 하루의 피로를 풀고 몸과 마음을 재충전할 수 있는 완벽한 공간입니다.</p>
                 </div>
                 
                 <div class="feature-card fade-in">
                     <div class="feature-icon floating">
-                        <i class="fas fa-bolt"></i>
+                        <i class="fas fa-utensils"></i>
                     </div>
-                    <h3 class="feature-title">빠른 로딩</h3>
-                    <p class="feature-description">최신 기술로 제작하여 번개처럼 빠른 로딩 속도를 자랑합니다. 방문자들이 기다리지 않고 바로 콘텐츠를 즐길 수 있어요.</p>
+                    <h3 class="feature-title">맛있는 식사</h3>
+                    <p class="feature-description">지역 특산물로 만든 건강하고 맛있는 요리를 제공합니다. 산채 비빔밥부터 바베큐까지 다양한 메뉴로 미각을 만족시켜드립니다.</p>
                 </div>
                 
                 <div class="feature-card fade-in">
                     <div class="feature-icon floating">
-                        <i class="fas fa-heart"></i>
+                        <i class="fas fa-hiking"></i>
                     </div>
-                    <h3 class="feature-title">맞춤형 솔루션</h3>
-                    <p class="feature-description">고객의 브랜드와 개성에 맞는 유니크한 웹사이트를 제작합니다. 획일화된 템플릿이 아닌, 오직 당신만의 특별한 공간을 만들어드려요.</p>
+                    <h3 class="feature-title">자연 체험</h3>
+                    <p class="feature-description">주변 산책로와 등산 코스를 통해 자연과 하나되는 특별한 경험을 즐기세요. 계절마다 다른 아름다운 풍경이 여러분을 기다립니다.</p>
                 </div>
                 
                 <div class="feature-card fade-in">
                     <div class="feature-icon floating">
-                        <i class="fas fa-shield-alt"></i>
+                        <i class="fas fa-car"></i>
                     </div>
-                    <h3 class="feature-title">안전한 보안</h3>
-                    <p class="feature-description">최신 보안 기술을 적용하여 안전하고 신뢰할 수 있는 웹사이트를 제공합니다. 고객의 소중한 데이터를 철저히 보호해드려요.</p>
+                    <h3 class="feature-title">편리한 주차</h3>
+                    <p class="feature-description">넓고 안전한 주차 공간을 무료로 제공합니다. 차량 이용 고객들을 위한 편리한 접근성과 24시간 보안 시설을 갖추고 있습니다.</p>
                 </div>
                 
                 <div class="feature-card fade-in">
                     <div class="feature-icon floating">
-                        <i class="fas fa-headset"></i>
+                        <i class="fas fa-concierge-bell"></i>
                     </div>
-                    <h3 class="feature-title">따뜻한 지원</h3>
-                    <p class="feature-description">프로젝트 완료 후에도 지속적인 관리와 따뜻한 고객 지원을 제공합니다. 언제든지 편안하게 문의주시면 친절히 도와드릴게요.</p>
+                    <h3 class="feature-title">친절한 서비스</h3>
+                    <p class="feature-description">가족같은 따뜻한 마음으로 모든 고객을 맞이합니다. 24시간 상주하는 친절한 직원들이 편안하고 즐거운 숙박을 위해 최선을 다합니다.</p>
                 </div>
             </div>
         </div>
@@ -108,149 +574,20 @@
         <div class="container">
             <div class="stats-grid">
                 <div class="stat-item fade-in">
-                    <span class="stat-number">150+</span>
-                    <span class="stat-label">행복한 고객들</span>
+                    <span class="stat-number">500+</span>
+                    <span class="stat-label">만족한 투숙객</span>
                 </div>
                 <div class="stat-item fade-in">
-                    <span class="stat-number">98%</span>
-                    <span class="stat-label">만족도</span>
+                    <span class="stat-number">95%</span>
+                    <span class="stat-label">재방문율</span>
                 </div>
                 <div class="stat-item fade-in">
                     <span class="stat-number">24/7</span>
-                    <span class="stat-label">고객 지원</span>
+                    <span class="stat-label">상주 서비스</span>
                 </div>
                 <div class="stat-item fade-in">
-                    <span class="stat-number">3일</span>
-                    <span class="stat-label">평균 완성 시간</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Portfolio Section -->
-    <section id="portfolio" class="portfolio">
-        <div class="container">
-            <h2 class="section-title fade-in">🎨 포트폴리오</h2>
-            <p class="section-subtitle fade-in">따뜻한 감성으로 만든 웹사이트들을 만나보세요</p>
-            
-            <div class="portfolio-grid">
-                <div class="portfolio-item fade-in">
-                    <div class="portfolio-image">
-                        <div class="portfolio-placeholder cafe">
-                            <i class="fas fa-coffee"></i>
-                            <span>카페 웹사이트</span>
-                        </div>
-                    </div>
-                    <div class="portfolio-content">
-                        <h3>모모 카페</h3>
-                        <p>따뜻한 분위기의 동네 카페를 위한 감성적인 웹사이트</p>
-                        <div class="portfolio-tags">
-                            <span class="tag">카페</span>
-                            <span class="tag">모바일</span>
-                            <span class="tag">예약시스템</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="portfolio-item fade-in">
-                    <div class="portfolio-image">
-                        <div class="portfolio-placeholder flower">
-                            <i class="fas fa-seedling"></i>
-                            <span>플라워샵</span>
-                        </div>
-                    </div>
-                    <div class="portfolio-content">
-                        <h3>봄날 플라워</h3>
-                        <p>자연의 아름다움을 담은 플라워샵 웹사이트</p>
-                        <div class="portfolio-tags">
-                            <span class="tag">플라워샵</span>
-                            <span class="tag">온라인주문</span>
-                            <span class="tag">갤러리</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="portfolio-item fade-in">
-                    <div class="portfolio-image">
-                        <div class="portfolio-placeholder bakery">
-                            <i class="fas fa-bread-slice"></i>
-                            <span>베이커리</span>
-                        </div>
-                    </div>
-                    <div class="portfolio-content">
-                        <h3>달콤 베이커리</h3>
-                        <p>갓 구운 빵의 향기가 느껴지는 베이커리 웹사이트</p>
-                        <div class="portfolio-tags">
-                            <span class="tag">베이커리</span>
-                            <span class="tag">쇼핑몰</span>
-                            <span class="tag">배달</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <div class="contact-content fade-in">
-                <h2 class="section-title">💌 함께 만들어봐요</h2>
-                <p class="section-subtitle">당신의 꿈을 따뜻한 웹사이트로 만들어드릴게요</p>
-                
-                <div class="contact-grid">
-                    <div class="contact-info">
-                        <div class="contact-item">
-                            <div class="contact-icon">
-                                <i class="fas fa-envelope"></i>
-                            </div>
-                            <div>
-                                <h4>이메일</h4>
-                                <p>hello@cozyspace.com</p>
-                            </div>
-                        </div>
-                        
-                        <div class="contact-item">
-                            <div class="contact-icon">
-                                <i class="fas fa-phone"></i>
-                            </div>
-                            <div>
-                                <h4>전화</h4>
-                                <p>010-1234-5678</p>
-                            </div>
-                        </div>
-                        
-                        <div class="contact-item">
-                            <div class="contact-icon">
-                                <i class="fas fa-clock"></i>
-                            </div>
-                            <div>
-                                <h4>운영시간</h4>
-                                <p>평일 9:00 - 18:00</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-form">
-                        <form>
-                            <div class="form-group">
-                                <input type="text" placeholder="이름" required>
-                            </div>
-                            <div class="form-group">
-                                <input type="email" placeholder="이메일" required>
-                            </div>
-                            <div class="form-group">
-                                <input type="tel" placeholder="전화번호">
-                            </div>
-                            <div class="form-group">
-                                <textarea placeholder="프로젝트에 대해 말씀해 주세요" rows="5" required></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-primary">
-                                <i class="fas fa-paper-plane"></i>
-                                메시지 보내기
-                            </button>
-                        </form>
-                    </div>
+                    <span class="stat-number">15년</span>
+                    <span class="stat-label">운영 경험</span>
                 </div>
             </div>
         </div>
@@ -260,11 +597,11 @@
     <section class="cta">
         <div class="container">
             <div class="cta-content fade-in">
-                <h2 class="cta-title">🌸 함께 특별한 공간을 만들어봐요</h2>
-                <p class="cta-subtitle">당신의 꿈과 아이디어를 따뜻하고 아름다운 웹사이트로 실현시켜보세요. 지금 바로 시작해볼까요?</p>
+                <h2 class="cta-title">🌸 특별한 추억을 만들어보세요</h2>
+                <p class="cta-subtitle">자연 속에서 소중한 사람들과 함께하는 힐링 타임을 경험해보세요. 지금 바로 예약하고 특별한 할인 혜택을 받아보세요!</p>
                 <a href="#contact" class="btn btn-primary">
-                    <i class="fas fa-heart"></i>
-                    무료 상담받기
+                    <i class="fas fa-phone"></i>
+                    예약 문의하기
                 </a>
             </div>
         </div>
@@ -274,8 +611,8 @@
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
-                <div class="footer-logo">CozySpace ✨</div>
-                <p class="footer-text">따뜻한 마음으로 만드는 디지털 공간</p>
+                <div class="footer-logo">코지 펜션 ✨</div>
+                <p class="footer-text">자연 속에서 만나는 따뜻한 휴식공간</p>
                 <div class="social-links">
                     <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
                     <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
@@ -284,11 +621,125 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 CozySpace. 모든 권리 보유. Made with 💕</p>
+                <p>&copy; 2024 코지 펜션. 모든 권리 보유. Made with 💕</p>
             </div>
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all fade-in elements
+        document.addEventListener('DOMContentLoaded', () => {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            fadeElements.forEach(element => {
+                observer.observe(element);
+            });
+
+            // Add visible class to hero elements immediately
+            const heroElements = document.querySelectorAll('.hero .fade-in');
+            setTimeout(() => {
+                heroElements.forEach((element, index) => {
+                    setTimeout(() => {
+                        element.classList.add('visible');
+                    }, index * 200);
+                });
+            }, 500);
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 248, 240, 0.98)';
+                header.style.boxShadow = '0 2px 20px rgba(255, 159, 122, 0.1)';
+            } else {
+                header.style.background = 'rgba(255, 248, 240, 0.95)';
+                header.style.boxShadow = 'none';
+            }
+        });
+
+        // Counter animation for stats
+        function animateCounters() {
+            const counters = document.querySelectorAll('.stat-number');
+            counters.forEach(counter => {
+                const target = parseInt(counter.textContent);
+                const increment = target / 100;
+                let current = 0;
+                
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        current = target;
+                        clearInterval(timer);
+                    }
+                    
+                    if (target > 100) {
+                        counter.textContent = Math.floor(current) + '+';
+                    } else if (counter.textContent.includes('%')) {
+                        counter.textContent = Math.floor(current) + '%';
+                    } else if (counter.textContent.includes('/')) {
+                        counter.textContent = counter.textContent; // Keep original for 24/7
+                    } else {
+                        counter.textContent = Math.floor(current) + '일';
+                    }
+                }, 50);
+            });
+        }
+
+        // Trigger counter animation when stats section is visible
+        const statsSection = document.querySelector('.stats');
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounters();
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        if (statsSection) {
+            statsObserver.observe(statsSection);
+        }
+
+        // Add some interactive hover effects
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                const icon = card.querySelector('.feature-icon');
+                icon.style.transform = 'scale(1.1) rotate(5deg)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                const icon = card.querySelector('.feature-icon');
+                icon.style.transform = 'scale(1) rotate(0deg)';
+            });
+        });
+    </script>
 </body>
 </html>

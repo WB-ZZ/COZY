@@ -71,14 +71,16 @@ function animateCounters() {
                 clearInterval(timer);
             }
             
-            if (target > 100) {
-                counter.textContent = Math.floor(current) + '+';
+            if (counter.textContent.includes('년')) {
+                counter.textContent = Math.floor(current) + '년';
             } else if (counter.textContent.includes('%')) {
                 counter.textContent = Math.floor(current) + '%';
             } else if (counter.textContent.includes('/')) {
                 counter.textContent = counter.textContent; // Keep original for 24/7
+            } else if (counter.textContent.includes('실')) {
+                counter.textContent = Math.floor(current) + '실';
             } else {
-                counter.textContent = Math.floor(current) + '일';
+                counter.textContent = Math.floor(current);
             }
         }, 50);
     });
@@ -138,10 +140,10 @@ document.addEventListener('DOMContentLoaded', () => {
             
             if (isValid) {
                 // Show success message
-                showNotification('메시지가 성공적으로 전송되었습니다! 💕', 'success');
+                showNotification('예약 문의가 성공적으로 전송되었습니다! 🏡', 'success');
                 contactForm.reset();
             } else {
-                showNotification('모든 필드를 입력해주세요. 😊', 'error');
+                showNotification('예약에 필요한 모든 정보를 입력해주세요. 🌿', 'error');
             }
         });
     }
