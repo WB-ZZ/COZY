@@ -56,50 +56,8 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// Counter animation for stats
-function animateCounters() {
-    const counters = document.querySelectorAll('.stat-number');
-    counters.forEach(counter => {
-        const target = parseInt(counter.textContent);
-        const increment = target / 100;
-        let current = 0;
-        
-        const timer = setInterval(() => {
-            current += increment;
-            if (current >= target) {
-                current = target;
-                clearInterval(timer);
-            }
-            
-            if (counter.textContent.includes('년')) {
-                counter.textContent = Math.floor(current) + '년';
-            } else if (counter.textContent.includes('%')) {
-                counter.textContent = Math.floor(current) + '%';
-            } else if (counter.textContent.includes('/')) {
-                counter.textContent = counter.textContent; // Keep original for 24/7
-            } else if (counter.textContent.includes('객실')) {
-                counter.textContent = Math.floor(current);
-            } else {
-                counter.textContent = Math.floor(current);
-            }
-        }, 50);
-    });
-}
-
-// Trigger counter animation when stats section is visible
-const statsSection = document.querySelector('.stats');
-const statsObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            animateCounters();
-            statsObserver.unobserve(entry.target);
-        }
-    });
-}, { threshold: 0.5 });
-
-if (statsSection) {
-    statsObserver.observe(statsSection);
-}
+// Stats section - keep original values without animation interference
+// Disabled counter animation to prevent stat corruption
 
 // Add some interactive hover effects
 document.querySelectorAll('.feature-card').forEach(card => {
