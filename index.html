@@ -545,24 +545,6 @@
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">코지 펜션 ✨</div>
-                <p class="footer-text">자연 속에서 만나는 따뜻한 휴식공간</p>
-                <div class="social-links">
-                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                    <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
-                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-                    <a href="#" class="social-link"><i class="fas fa-envelope"></i></a>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 코지 펜션. 모든 권리 보유. Made with 💕</p>
-            </div>
-        </div>
-    </footer>
 
     <script>
         // Smooth scrolling for navigation links
@@ -623,48 +605,8 @@
             }
         });
 
-        // Counter animation for stats
-        function animateCounters() {
-            const counters = document.querySelectorAll('.stat-number');
-            counters.forEach(counter => {
-                const target = parseInt(counter.textContent);
-                const increment = target / 100;
-                let current = 0;
-                
-                const timer = setInterval(() => {
-                    current += increment;
-                    if (current >= target) {
-                        current = target;
-                        clearInterval(timer);
-                    }
-                    
-                    if (target > 100) {
-                        counter.textContent = Math.floor(current) + '+';
-                    } else if (counter.textContent.includes('%')) {
-                        counter.textContent = Math.floor(current) + '%';
-                    } else if (counter.textContent.includes('/')) {
-                        counter.textContent = counter.textContent; // Keep original for 24/7
-                    } else {
-                        counter.textContent = Math.floor(current) + '일';
-                    }
-                }, 50);
-            });
-        }
-
-        // Trigger counter animation when stats section is visible
-        const statsSection = document.querySelector('.stats');
-        const statsObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    animateCounters();
-                    statsObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.5 });
-
-        if (statsSection) {
-            statsObserver.observe(statsSection);
-        }
+        // Stats section - keep original values (NO ANIMATION)
+        // 통계 애니메이션 완전 제거
 
         // Add some interactive hover effects
         document.querySelectorAll('.feature-card').forEach(card => {
@@ -693,22 +635,24 @@
                     filterButtons.forEach(btn => btn.classList.remove('active'));
                     button.classList.add('active');
                     
-                    // Filter gallery items
-                    galleryItems.forEach(item => {
+                    // Filter gallery items with smooth animation
+                    galleryItems.forEach((item, index) => {
                         const category = item.getAttribute('data-category');
                         
                         if (filter === 'all' || category === filter) {
                             item.style.display = 'block';
+                            item.style.transition = 'all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
                             setTimeout(() => {
                                 item.style.opacity = '1';
-                                item.style.transform = 'scale(1)';
-                            }, 50);
+                                item.style.transform = 'scale(1) translateY(0)';
+                            }, index * 50);
                         } else {
+                            item.style.transition = 'all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
                             item.style.opacity = '0';
-                            item.style.transform = 'scale(0.8)';
+                            item.style.transform = 'scale(0.9) translateY(20px)';
                             setTimeout(() => {
                                 item.style.display = 'none';
-                            }, 300);
+                            }, 400);
                         }
                     });
                 });

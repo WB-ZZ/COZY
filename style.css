@@ -55,10 +55,10 @@
 }
 
 body {
-    font-family: 'Inter', 'Noto Sans KR', sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', 'Helvetica Neue', Arial, sans-serif;
     font-weight: 400;
-    line-height: 1.7;
-    letter-spacing: -0.015em;
+    line-height: 1.6;
+    letter-spacing: -0.01em;
     color: var(--deep-brown);
     background: var(--paper-white);
     overflow-x: hidden;
@@ -76,11 +76,11 @@ body {
     right: 0;
     z-index: 1000;
     padding: 1.5rem 0;
-    background: var(--glass-bg);
-    backdrop-filter: var(--glass-backdrop);
-    border-bottom: 1px solid var(--glass-border);
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-    box-shadow: 0 8px 32px rgba(45, 24, 16, 0.04);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
 .nav-container {
@@ -93,9 +93,9 @@ body {
 }
 
 .logo {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.8rem;
-    font-weight: 600;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 800;
     color: var(--deep-brown);
     text-decoration: none;
     letter-spacing: -0.02em;
@@ -190,13 +190,13 @@ body {
 }
 
 .hero-title {
-    font-family: 'Playfair Display', serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     font-size: clamp(3.5rem, 7vw, 6rem);
-    font-weight: 700;
+    font-weight: 900;
     color: var(--pure-white);
     margin-bottom: 2rem;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
+    line-height: 1.0;
+    letter-spacing: -0.04em;
     text-shadow: 0 4px 20px rgba(0,0,0,0.7), 0 2px 8px rgba(0,0,0,0.5);
 }
 
@@ -320,12 +320,12 @@ body {
 /* ===== 섹션 타이틀 ===== */
 .section-title {
     text-align: center;
-    font-family: 'Playfair Display', serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     font-size: clamp(2.5rem, 5vw, 3.5rem);
-    font-weight: 600;
+    font-weight: 800;
     color: var(--deep-brown);
     margin-bottom: 1rem;
-    letter-spacing: -0.01em;
+    letter-spacing: -0.03em;
 }
 
 .section-subtitle {
@@ -339,29 +339,36 @@ body {
     margin-right: auto;
 }
 
-/* ===== 피처 섹션 ===== */
+/* ===== 혁신적인 피처 섹션 ===== */
 .features {
-    padding: 8rem 0;
-    background: var(--warm-cream);
+    padding: 0;
+    background: transparent;
+    position: relative;
+    margin: -10rem 0 10rem;
 }
 
 .features-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 3rem;
-    margin-top: 4rem;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
 }
 
 .feature-card {
-    background: var(--pure-white);
-    padding: 3rem;
-    border-radius: 12px;
-    box-shadow: var(--shadow-card);
-    transition: all 0.4s ease;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    padding: 3rem 2.5rem;
+    border-radius: 24px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     text-align: center;
-    border: 1px solid rgba(0, 0, 0, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.3);
     transform: translateY(40px);
     opacity: 0;
+    position: relative;
+    overflow: hidden;
 }
 
 .feature-card.visible {
@@ -377,38 +384,62 @@ body {
 .feature-card:nth-child(6) { transition-delay: 0.6s; }
 
 .feature-card:hover {
-    transform: translateY(-12px) scale(1.02);
-    box-shadow: var(--shadow-elevated);
-    border-color: rgba(0, 0, 0, 0.08);
+    transform: translateY(-20px) scale(1.03);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+    border-color: rgba(255, 255, 255, 0.6);
+}
+
+.feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    transition: left 0.6s ease;
+    z-index: 1;
+}
+
+.feature-card:hover::before {
+    left: 100%;
 }
 
 .feature-icon {
-    width: 70px;
-    height: 70px;
-    background: var(--gradient-nature);
-    border-radius: 12px;
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 0 auto 2rem;
-    font-size: 1.8rem;
+    font-size: 2rem;
     color: var(--white);
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
 }
 
 .feature-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.5rem;
-    font-weight: 600;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 700;
     color: var(--deep-brown);
     margin-bottom: 1rem;
-    letter-spacing: -0.01em;
+    letter-spacing: -0.02em;
+    position: relative;
+    z-index: 2;
 }
 
 .feature-description {
     color: var(--warm-gray);
-    line-height: 1.6;
+    line-height: 1.7;
     font-weight: 400;
+    position: relative;
+    z-index: 2;
+    font-size: 0.95rem;
 }
 
 /* ===== About 섹션 ===== */
@@ -1180,67 +1211,135 @@ body {
 
 /* ===== 푸터 ===== */
 .footer {
-    background: var(--soft-black);
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
     color: var(--white);
-    padding: 4rem 0 2rem;
-    text-align: center;
+    padding: 6rem 0 2rem;
+}
+
+.footer-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
 }
 
 .footer-content {
-    max-width: 800px;
-    margin: 0 auto;
-    padding-bottom: 2rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 4rem;
+    margin-bottom: 3rem;
+    text-align: left;
 }
 
-.footer-logo {
-    font-family: 'Playfair Display', serif;
-    font-size: 2rem;
-    font-weight: 600;
+.footer-section h3,
+.footer-section h4 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
     color: var(--white);
-    margin-bottom: 1rem;
-    letter-spacing: -0.01em;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
 }
 
-.footer-text {
-    color: rgba(255, 255, 255, 0.8);
-    margin-bottom: 2rem;
-    font-weight: 400;
+.footer-section p {
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.6;
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links li {
+    margin-bottom: 0.8rem;
+}
+
+.footer-links a {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: var(--white);
+}
+
+.footer-contact p {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 1rem;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+}
+
+.footer-contact i {
+    width: 16px;
+    color: rgba(255, 255, 255, 0.5);
 }
 
 .social-links {
     display: flex;
-    justify-content: center;
     gap: 1rem;
+    margin-top: 1rem;
 }
 
 .social-link {
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     background: rgba(255, 255, 255, 0.1);
-    color: var(--white);
-    border-radius: 10px;
+    color: rgba(255, 255, 255, 0.7);
+    border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
     text-decoration: none;
-    font-size: 1.2rem;
+    font-size: 1rem;
     transition: all 0.3s ease;
 }
 
 .social-link:hover {
     background: rgba(255, 255, 255, 0.2);
+    color: var(--white);
     transform: translateY(-2px);
 }
 
 .footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
     padding-top: 2rem;
 }
 
-.footer-bottom p {
-    color: rgba(255, 255, 255, 0.6);
-    font-size: 0.9rem;
-    font-weight: 400;
+.footer-bottom-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.footer-bottom-content p {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.85rem;
+    margin: 0;
+}
+
+.footer-bottom-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.footer-bottom-links a {
+    color: rgba(255, 255, 255, 0.5);
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: color 0.3s ease;
+}
+
+.footer-bottom-links a:hover {
+    color: rgba(255, 255, 255, 0.8);
 }
 
 /* ===== 모달 ===== */
