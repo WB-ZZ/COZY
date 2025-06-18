@@ -1,31 +1,32 @@
 /* ===== 모던 럭셔리 펜션 디자인 시스템 ===== */
 :root {
-    /* 모던 럭셔리 색상 팔레트 */
-    --paper-white: #FFFFFF;
-    --cloud-gray: #F7F8FA;
-    --mist-blue: #F0F4F8;
-    --sage-wash: #E6F1E8;
-    --lavender-mist: #F2F0F7;
-    --warm-stone: #F6F4F1;
-    --earth-beige: #F3F0ED;
-    --soft-moss: #E8F0E6;
+    /* 따뜻한 아늑함 색상 팔레트 */
+    --paper-white: #FEFEFE;
+    --warm-cream: #FBF8F3;
+    --soft-sand: #F7F2E8;
+    --natural-beige: #F0E6D2;
+    --gentle-stone: #EAE0D5;
+    --cozy-wood: #E8DDD2;
+    --autumn-mist: #F4F0E8;
+    --forest-whisper: #E7EDE7;
     
-    /* 텍스트 색상 */
-    --charcoal: #1F2937;
-    --slate-gray: #4B5563;
-    --soft-black: #111827;
-    --muted-gray: #6B7280;
-    --white: #FFFFFF;
+    /* 따뜻한 텍스트 색상 */
+    --deep-brown: #2D1810;
+    --warm-gray: #5D4E43;
+    --soft-charcoal: #3A312B;
+    --muted-brown: #6B5B50;
+    --pure-white: #FFFFFF;
     
-    /* 모던 그라데이션 */
-    --gradient-sky: linear-gradient(135deg, var(--mist-blue) 0%, var(--cloud-gray) 100%);
-    --gradient-earth: linear-gradient(135deg, var(--warm-stone) 0%, var(--earth-beige) 100%);
-    --gradient-nature: linear-gradient(135deg, var(--sage-wash) 0%, var(--soft-moss) 100%);
+    /* 아늑한 그라데이션 */
+    --gradient-sunset: linear-gradient(135deg, var(--warm-cream) 0%, var(--soft-sand) 100%);
+    --gradient-earth: linear-gradient(135deg, var(--natural-beige) 0%, var(--cozy-wood) 100%);
+    --gradient-forest: linear-gradient(135deg, var(--forest-whisper) 0%, var(--autumn-mist) 100%);
     
-    /* 세련된 그림자 */
-    --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.06);
-    --shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.12);
-    --shadow-card: 0 2px 16px rgba(0, 0, 0, 0.04);
+    /* 따뜻한 그림자 */
+    --shadow-soft: 0 8px 32px rgba(45, 24, 16, 0.08);
+    --shadow-hover: 0 16px 48px rgba(45, 24, 16, 0.15);
+    --shadow-card: 0 4px 24px rgba(45, 24, 16, 0.06);
+    --shadow-warm: 0 12px 40px rgba(93, 78, 67, 0.12);
 }
 
 /* ===== 기본 설정 ===== */
@@ -40,7 +41,7 @@ body {
     font-weight: 400;
     line-height: 1.7;
     letter-spacing: -0.015em;
-    color: var(--charcoal);
+    color: var(--deep-brown);
     background: var(--paper-white);
     overflow-x: hidden;
     font-feature-settings: "liga" 1, "kern" 1;
@@ -76,7 +77,7 @@ body {
     font-family: 'Playfair Display', serif;
     font-size: 1.8rem;
     font-weight: 600;
-    color: var(--soft-black);
+    color: var(--deep-brown);
     text-decoration: none;
     letter-spacing: -0.02em;
 }
@@ -88,7 +89,7 @@ body {
 }
 
 .nav-link {
-    color: var(--slate-gray);
+    color: var(--warm-gray);
     text-decoration: none;
     font-weight: 500;
     padding: 0.5rem 0;
@@ -98,8 +99,8 @@ body {
 }
 
 .nav-link:hover {
-    color: var(--soft-black);
-    border-bottom-color: var(--charcoal);
+    color: var(--deep-brown);
+    border-bottom-color: var(--soft-charcoal);
 }
 
 /* ===== 히어로 섹션 ===== */
@@ -108,7 +109,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--gradient-earth);
+    background: var(--gradient-sunset);
     position: relative;
     overflow: hidden;
 }
@@ -143,7 +144,7 @@ body {
     font-family: 'Playfair Display', serif;
     font-size: clamp(3rem, 6vw, 5rem);
     font-weight: 600;
-    color: var(--soft-black);
+    color: var(--deep-brown);
     margin-bottom: 1.5rem;
     line-height: 1.1;
     letter-spacing: -0.02em;
@@ -151,7 +152,7 @@ body {
 
 .hero-subtitle {
     font-size: clamp(1.1rem, 2vw, 1.3rem);
-    color: var(--slate-gray);
+    color: var(--warm-gray);
     margin-bottom: 2.5rem;
     font-weight: 400;
     max-width: 600px;
@@ -195,8 +196,8 @@ body {
 }
 
 .btn-secondary {
-    background: var(--white);
-    color: var(--soft-black);
+    background: var(--pure-white);
+    color: var(--deep-brown);
     border: 1px solid rgba(0, 0, 0, 0.12);
 }
 
@@ -219,7 +220,7 @@ body {
     font-family: 'Playfair Display', serif;
     font-size: clamp(2.5rem, 5vw, 3.5rem);
     font-weight: 600;
-    color: var(--soft-black);
+    color: var(--deep-brown);
     margin-bottom: 1rem;
     letter-spacing: -0.01em;
 }
@@ -227,7 +228,7 @@ body {
 .section-subtitle {
     text-align: center;
     font-size: 1.2rem;
-    color: var(--slate-gray);
+    color: var(--warm-gray);
     margin-bottom: 4rem;
     font-weight: 400;
     max-width: 600px;
@@ -238,7 +239,7 @@ body {
 /* ===== 피처 섹션 ===== */
 .features {
     padding: 8rem 0;
-    background: var(--paper-white);
+    background: var(--warm-cream);
 }
 
 .features-grid {
@@ -249,7 +250,7 @@ body {
 }
 
 .feature-card {
-    background: var(--white);
+    background: var(--pure-white);
     padding: 3rem;
     border-radius: 12px;
     box-shadow: var(--shadow-card);
@@ -282,13 +283,13 @@ body {
     font-family: 'Playfair Display', serif;
     font-size: 1.5rem;
     font-weight: 600;
-    color: var(--soft-black);
+    color: var(--deep-brown);
     margin-bottom: 1rem;
     letter-spacing: -0.01em;
 }
 
 .feature-description {
-    color: var(--slate-gray);
+    color: var(--warm-gray);
     line-height: 1.6;
     font-weight: 400;
 }
@@ -296,7 +297,7 @@ body {
 /* ===== About 섹션 ===== */
 .about {
     padding: 8rem 0;
-    background: var(--gradient-sky);
+    background: var(--gradient-forest);
 }
 
 .about-content {
@@ -312,7 +313,7 @@ body {
 
 .about-description {
     font-size: 1.2rem;
-    color: var(--slate-gray);
+    color: var(--warm-gray);
     line-height: 1.8;
     margin-bottom: 3rem;
     font-weight: 400;
@@ -329,7 +330,7 @@ body {
     align-items: flex-start;
     gap: 1.5rem;
     padding: 2rem;
-    background: var(--white);
+    background: var(--pure-white);
     border-radius: 16px;
     box-shadow: var(--shadow-card);
     transition: all 0.3s ease;
@@ -344,27 +345,28 @@ body {
 .about-feature i {
     width: 50px;
     height: 50px;
-    background: var(--gradient-nature);
-    color: var(--white);
+    background: var(--gradient-earth);
+    color: var(--pure-white);
     border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 1.3rem;
     flex-shrink: 0;
+    box-shadow: var(--shadow-warm);
 }
 
 .about-feature h4 {
     font-family: 'Playfair Display', serif;
     font-size: 1.3rem;
     font-weight: 600;
-    color: var(--soft-black);
+    color: var(--deep-brown);
     margin-bottom: 0.5rem;
     letter-spacing: -0.01em;
 }
 
 .about-feature p {
-    color: var(--slate-gray);
+    color: var(--warm-gray);
     line-height: 1.6;
     font-weight: 400;
 }
@@ -404,7 +406,7 @@ body {
 /* ===== 갤러리 섹션 ===== */
 .gallery {
     padding: 8rem 0;
-    background: var(--cloud-gray);
+    background: var(--soft-sand);
 }
 
 .gallery-container {
@@ -423,8 +425,8 @@ body {
 
 .filter-btn {
     padding: 0.8rem 2rem;
-    background: var(--white);
-    color: var(--slate-gray);
+    background: var(--pure-white);
+    color: var(--warm-gray);
     border: 1px solid rgba(0, 0, 0, 0.08);
     border-radius: 6px;
     cursor: pointer;
@@ -439,7 +441,7 @@ body {
 .filter-btn.active {
     background: var(--soft-black);
     color: var(--white);
-    border-color: var(--soft-black);
+    border-color: var(--deep-brown);
     transform: translateY(-1px);
 }
 
@@ -456,7 +458,7 @@ body {
     border-radius: 12px;
     overflow: hidden;
     cursor: pointer;
-    background: var(--white);
+    background: var(--pure-white);
     box-shadow: var(--shadow-card);
     transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
@@ -620,14 +622,14 @@ body {
     font-family: 'Playfair Display', serif;
     font-size: clamp(2.5rem, 5vw, 3.5rem);
     font-weight: 600;
-    color: var(--soft-black);
+    color: var(--deep-brown);
     margin-bottom: 1.5rem;
     letter-spacing: -0.01em;
 }
 
 .cta-subtitle {
     font-size: 1.2rem;
-    color: var(--slate-gray);
+    color: var(--warm-gray);
     margin-bottom: 3rem;
     font-weight: 400;
     line-height: 1.6;
@@ -656,7 +658,7 @@ body {
     font-family: 'Playfair Display', serif;
     font-size: 2rem;
     font-weight: 600;
-    color: var(--soft-black);
+    color: var(--deep-brown);
     margin-bottom: 2rem;
     letter-spacing: -0.01em;
 }
@@ -667,7 +669,7 @@ body {
     gap: 1.5rem;
     margin-bottom: 2rem;
     padding: 1.5rem;
-    background: var(--white);
+    background: var(--pure-white);
     border-radius: 12px;
     box-shadow: var(--shadow-card);
     transition: all 0.3s ease;
@@ -696,20 +698,20 @@ body {
     font-family: 'Playfair Display', serif;
     font-size: 1.2rem;
     font-weight: 600;
-    color: var(--soft-black);
+    color: var(--deep-brown);
     margin-bottom: 0.5rem;
     letter-spacing: -0.01em;
 }
 
 .contact-details p {
-    color: var(--slate-gray);
+    color: var(--warm-gray);
     line-height: 1.5;
     font-weight: 400;
 }
 
 /* ===== 예약 시스템 ===== */
 .booking-system {
-    background: var(--white);
+    background: var(--pure-white);
     padding: 3rem;
     border-radius: 16px;
     box-shadow: var(--shadow-soft);
@@ -725,13 +727,13 @@ body {
     font-family: 'Playfair Display', serif;
     font-size: 2rem;
     font-weight: 600;
-    color: var(--soft-black);
+    color: var(--deep-brown);
     margin-bottom: 1rem;
     letter-spacing: -0.01em;
 }
 
 .booking-header p {
-    color: var(--slate-gray);
+    color: var(--warm-gray);
     font-weight: 400;
 }
 
@@ -761,7 +763,7 @@ body {
 
 .form-field label {
     font-weight: 500;
-    color: var(--soft-black);
+    color: var(--deep-brown);
     font-size: 0.9rem;
     letter-spacing: -0.005em;
 }
@@ -772,10 +774,10 @@ body {
     padding: 1rem;
     border: 1px solid rgba(0, 0, 0, 0.08);
     border-radius: 8px;
-    background: var(--white);
+    background: var(--pure-white);
     font-family: 'Inter', sans-serif;
     font-size: 1rem;
-    color: var(--charcoal);
+    color: var(--soft-charcoal);
     transition: all 0.3s ease;
 }
 
@@ -783,7 +785,7 @@ body {
 .form-select:focus,
 .date-input:focus {
     outline: none;
-    border-color: var(--soft-black);
+    border-color: var(--deep-brown);
     box-shadow: 0 0 0 3px rgba(17, 24, 39, 0.1);
 }
 
@@ -795,7 +797,7 @@ body {
 
 .calendar-label {
     font-weight: 500;
-    color: var(--soft-black);
+    color: var(--deep-brown);
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -826,7 +828,7 @@ body {
 
 .counter-label {
     font-weight: 500;
-    color: var(--soft-black);
+    color: var(--deep-brown);
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -842,8 +844,8 @@ body {
     width: 40px;
     height: 40px;
     border: 1px solid var(--soft-black);
-    background: var(--white);
-    color: var(--soft-black);
+    background: var(--pure-white);
+    color: var(--deep-brown);
     border-radius: 6px;
     cursor: pointer;
     font-size: 1.2rem;
@@ -862,7 +864,7 @@ body {
 .counter-value {
     font-size: 1.2rem;
     font-weight: 600;
-    color: var(--soft-black);
+    color: var(--deep-brown);
     min-width: 40px;
     text-align: center;
 }
@@ -878,7 +880,7 @@ body {
     font-family: 'Playfair Display', serif;
     font-size: 1.3rem;
     font-weight: 600;
-    color: var(--soft-black);
+    color: var(--deep-brown);
     margin-bottom: 1.5rem;
     display: flex;
     align-items: center;
@@ -897,7 +899,7 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 1rem;
-    background: var(--white);
+    background: var(--pure-white);
     border-radius: 8px;
     transition: all 0.3s ease;
     border: 1px solid rgba(0, 0, 0, 0.04);
@@ -916,20 +918,20 @@ body {
 
 .option-name {
     font-weight: 500;
-    color: var(--soft-black);
+    color: var(--deep-brown);
     font-size: 0.9rem;
 }
 
 .option-price {
     font-size: 0.8rem;
-    color: var(--slate-gray);
+    color: var(--warm-gray);
     font-weight: 500;
 }
 
 .option-checkbox {
     width: 20px;
     height: 20px;
-    accent-color: var(--soft-black);
+    accent-color: var(--deep-brown);
 }
 
 .price-summary {
@@ -1088,7 +1090,7 @@ body {
     position: relative;
     max-width: 90vw;
     max-height: 90vh;
-    background: var(--white);
+    background: var(--pure-white);
     border-radius: 12px;
     padding: 2rem;
     transform: scale(0.9);
