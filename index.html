@@ -8,29 +8,138 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Comfortaa:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <style>
-        /* ===== CSS Variables ===== */
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav-container">
+            <a href="#" class="logo">코지 펜션</a>
+            
+            <!-- Desktop Navigation -->
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">홈</a></li>
+                <li><a href="#features" class="nav-link">객실/시설</a></li>
+                <li><a href="#gallery" class="nav-link">갤러리</a></li>
+                <li><a href="#contact" class="nav-link">연락처</a></li>
+            </ul>
+            
+            <!-- Mobile Menu Toggle -->
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="메뉴 열기">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+    </header>
+    
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title fade-in">자연 속 아늑한 휴식공간<br>코지 펜션에 오세요</h1>
+            <p class="hero-subtitle fade-in">산과 바다가 어우러진 자연 속에서 특별한 추억을 만들어보세요.<br>따뜻한 환대와 편안한 시설로 완벽한 휴식을 선사합니다.</p>
+            <div class="hero-buttons">
+                <a href="#contact" class="btn btn-primary">
+                    <i class="fas fa-calendar-check"></i>
+                    예약하기
+                </a>
+                <a href="#features" class="btn btn-secondary">
+                    <i class="fas fa-eye"></i>
+                    객실보기
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title fade-in">특별한 객실과 시설을 만나보세요</h2>
+            <div class="features-grid">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-bed"></i>
+                    </div>
+                    <h3 class="feature-title">프리미엄 객실</h3>
+                    <p class="feature-description">따뜻하고 포근한 인테리어로 꾸며진 프리미엄 객실입니다. 자연을 느낄 수 있는 큰 창문과 편안한 침구로 최고의 휴식을 제공합니다.</p>
+                </div>
+                
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-hot-tub"></i>
+                    </div>
+                    <h3 class="feature-title">스파 & 찜질방</h3>
+                    <p class="feature-description">천연 온천수를 이용한 스파 시설과 전통 찜질방을 운영합니다. 하루의 피로를 풀고 몸과 마음을 재충전할 수 있는 완벽한 공간입니다.</p>
+                </div>
+                
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <h3 class="feature-title">맛있는 식사</h3>
+                    <p class="feature-description">지역 특산물로 만든 건강하고 맛있는 요리를 제공합니다. 산채 비빔밥부터 바베큐까지 다양한 메뉴로 미각을 만족시켜드립니다.</p>
+                </div>
+                
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-hiking"></i>
+                    </div>
+                    <h3 class="feature-title">자연 체험</h3>
+                    <p class="feature-description">주변 산책로와 등산 코스를 통해 자연과 하나되는 특별한 경험을 즐기세요. 계절마다 다른 아름다운 풍경이 여러분을 기다립니다.</p>
+                </div>
+                
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-car"></i>
+                    </div>
+                    <h3 class="feature-title">편리한 주차</h3>
+                    <p class="feature-description">넓고 안전한 주차 공간을 무료로 제공합니다. 차량 이용 고객들을 위한 편리한 접근성과 24시간 보안 시설을 갖추고 있습니다.</p>
+                </div>
+                
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-concierge-bell"></i>
+                    </div>
+                    <h3 class="feature-title">친절한 서비스</h3>
+                    <p class="feature-description">가족같은 따뜻한 마음으로 모든 고객을 맞이합니다. 24시간 상주하는 친절한 직원들이 편안하고 즐거운 숙박을 위해 최선을 다합니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery">
+        <div class="gallery-container">
+            <h2 class="section-title fade-in">펜션의 아름다운 모습들</h2>
+            
+            <!-- Gallery Filters -->
+            <div class="gallery-filters fade-in">
+                <button class="filter-btn active" data-filter="all">전체</button>
+                <button class="filter-btn" data-filter="exterior">외관</button>
+                <button class="filter-btn" data-filter="room">객실</button>
+                <button class="filter-btn" data-filter="facility">시설</button>
+                <button class="filter-btn" data-filter="nature">자연</button>
+                <button class="filter-btn" data-filter="food">음식</button>
+            </div>
         :root {
-            /* 수채화 톤 색상 팔레트 */
-            --paper-white: #FEFEFE;
-            --cloud-gray: #F8F9FA;
-            --mist-blue: #E8F2F5;
-            --sage-wash: #D4E6E1;
-            --lavender-mist: #E8E5F0;
-            --warm-stone: #F0ECE8;
-            --earth-beige: #EDE7E0;
-            --soft-moss: #D8E2DC;
+            /* 모던 럭셔리 색상 팔레트 */
+            --paper-white: #FFFFFF;
+            --cloud-gray: #F7F8FA;
+            --mist-blue: #F0F4F8;
+            --sage-wash: #E6F1E8;
+            --lavender-mist: #F2F0F7;
+            --warm-stone: #F6F4F1;
+            --earth-beige: #F3F0ED;
+            --soft-moss: #E8F0E6;
             
             /* 텍스트 색상 */
-            --charcoal: #4A4A4A;
-            --slate-gray: #6B7280;
-            --soft-black: #2F2F2F;
-            --muted-gray: #9CA3AF;
+            --charcoal: #1F2937;
+            --slate-gray: #4B5563;
+            --soft-black: #111827;
+            --muted-gray: #6B7280;
             --white: #FFFFFF;
             
             /* 그라데이션 */
@@ -200,12 +309,13 @@
         }
         
         .hero-title {
-            font-family: 'Comfortaa', sans-serif;
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 700;
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 6vw, 5rem);
+            font-weight: 600;
             color: var(--soft-black);
             margin-bottom: 1.5rem;
-            line-height: 1.2;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
         }
         
         .hero-subtitle {
@@ -359,39 +469,42 @@
 
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
             margin-top: 3rem;
-            grid-auto-rows: 200px;
-            -webkit-overflow-scrolling: touch;
+            grid-auto-rows: 250px;
         }
 
         .gallery-item {
             position: relative;
-            border-radius: 20px;
+            border-radius: 16px;
             overflow: hidden;
             cursor: pointer;
             background: var(--white);
-            box-shadow: var(--shadow-soft);
-            transition: all 0.4s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
         .gallery-item:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: var(--shadow-hover);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
         }
 
-        /* Bento Grid Layout Variations */
+        /* Modern Bento Grid Layout */
         .gallery-item:nth-child(1) {
             grid-column: span 2;
             grid-row: span 2;
         }
 
-        .gallery-item:nth-child(4) {
+        .gallery-item:nth-child(2) {
+            grid-row: span 2;
+        }
+
+        .gallery-item:nth-child(5) {
             grid-column: span 2;
         }
 
-        .gallery-item:nth-child(6) {
+        .gallery-item:nth-child(7) {
             grid-row: span 2;
         }
 
@@ -2191,7 +2304,7 @@
     <section class="cta">
         <div class="container">
             <div class="cta-content fade-in">
-                <h2 class="cta-title">🌸 특별한 추억을 만들어보세요</h2>
+                <h2 class="cta-title">특별한 추억을 만들어보세요</h2>
                 <p class="cta-subtitle">자연 속에서 소중한 사람들과 함께하는 힐링 타임을 경험해보세요. 지금 바로 예약하고 특별한 할인 혜택을 받아보세요!</p>
                 <a href="#contact" class="btn btn-primary">
                     <i class="fas fa-phone"></i>
