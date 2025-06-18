@@ -44,15 +44,32 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 500);
 });
 
-// Header scroll effect
+// Header scroll effect with parallax
 window.addEventListener('scroll', () => {
     const header = document.querySelector('.header');
-    if (window.scrollY > 100) {
+    const hero = document.querySelector('.hero');
+    const heroContent = document.querySelector('.hero-content');
+    const scrolled = window.pageYOffset;
+    
+    // Header background change
+    if (scrolled > 100) {
         header.style.background = 'rgba(255, 248, 240, 0.98)';
         header.style.boxShadow = '0 2px 20px rgba(255, 159, 122, 0.1)';
     } else {
         header.style.background = 'rgba(255, 248, 240, 0.95)';
         header.style.boxShadow = 'none';
+    }
+    
+    // Parallax effect for hero content
+    if (hero && heroContent) {
+        const rate = scrolled * -0.5;
+        const opacity = Math.max(0, 1 - scrolled / (hero.offsetHeight * 0.8));
+        
+        heroContent.style.transform = `translateY(${rate}px) translateZ(0)`;
+        heroContent.style.opacity = opacity;
+        
+        // Parallax background effect
+        hero.style.transform = `translateY(${scrolled * 0.3}px)`;
     }
 });
 
@@ -230,16 +247,116 @@ function initMobileMenu() {
 // Initialize mobile menu
 document.addEventListener('DOMContentLoaded', initMobileMenu);
 
-// Add loading animation
+// Enhanced page loading animation
 document.addEventListener('DOMContentLoaded', () => {
-    // Add loading class to body
-    document.body.style.opacity = '0';
-    document.body.style.transition = 'opacity 0.5s ease';
+    // Create loading overlay
+    const loadingOverlay = document.createElement('div');
+    loadingOverlay.className = 'loading-overlay';
+    loadingOverlay.innerHTML = `
+        <div class="loading-content">
+            <div class="loading-logo">코지 펜션</div>
+            <div class="loading-spinner"></div>
+            <div class="loading-text">자연 속 아늑한 휴식을 준비하고 있습니다...</div>
+        </div>
+    `;
     
-    // Remove loading when everything is ready
+    // Add loading styles
+    const loadingStyles = document.createElement('style');
+    loadingStyles.textContent = `
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--warm-cream), var(--soft-sand));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+        
+        .loading-overlay.fade-out {
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        .loading-content {
+            text-align: center;
+            padding: 3rem;
+        }
+        
+        .loading-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 600;
+            color: var(--deep-brown);
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.3s forwards;
+        }
+        
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 2rem;
+            border: 3px solid rgba(45, 24, 16, 0.1);
+            border-top: 3px solid var(--deep-brown);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            opacity: 0;
+            animation: spin 1s linear infinite, fadeIn 0.5s ease 0.6s forwards;
+        }
+        
+        .loading-text {
+            color: var(--warm-gray);
+            font-size: 1.1rem;
+            font-weight: 400;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.9s forwards;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+    `;
+    
+    document.head.appendChild(loadingStyles);
+    document.body.appendChild(loadingOverlay);
+    
+    // Initial body setup
+    document.body.style.overflow = 'hidden';
+    document.body.style.opacity = '0';
+    document.body.style.transition = 'opacity 0.8s cubic-bezier(0.23, 1, 0.32, 1)';
+    
+    // Simulate loading and remove overlay
     setTimeout(() => {
+        loadingOverlay.classList.add('fade-out');
+        document.body.style.overflow = '';
         document.body.style.opacity = '1';
-    }, 100);
+        
+        setTimeout(() => {
+            loadingOverlay.remove();
+            loadingStyles.remove();
+        }, 600);
+    }, 2500);
 });
 
 // Performance optimization: Debounce scroll events
