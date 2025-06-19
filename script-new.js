@@ -1,4 +1,66 @@
 // 통합된 스크립트 - 중복 제거하여 재작성
+
+// ===== 페이지 로더 =====
+window.addEventListener('load', () => {
+    setTimeout(() => {
+        const loader = document.querySelector('.page-loader');
+        if (loader) {
+            loader.classList.add('fade-out');
+            setTimeout(() => {
+                loader.remove();
+            }, 800);
+        }
+    }, 1500);
+});
+
+// ===== 커스텀 커서 =====
+const cursor = document.querySelector('.cursor');
+const cursorFollower = document.querySelector('.cursor-follower');
+
+if (cursor && cursorFollower) {
+    let mouseX = 0, mouseY = 0;
+    let followerX = 0, followerY = 0;
+
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        cursor.style.left = mouseX + 'px';
+        cursor.style.top = mouseY + 'px';
+    });
+
+    const animateFollower = () => {
+        followerX += (mouseX - followerX) * 0.1;
+        followerY += (mouseY - followerY) * 0.1;
+        cursorFollower.style.left = followerX + 'px';
+        cursorFollower.style.top = followerY + 'px';
+        requestAnimationFrame(animateFollower);
+    };
+    animateFollower();
+
+    // 호버 효과
+    const hoverElements = document.querySelectorAll('a, button, .gallery-item, .feature-card, .stat-item');
+    hoverElements.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+            cursor.classList.add('hover');
+            cursorFollower.classList.add('hover');
+        });
+        el.addEventListener('mouseleave', () => {
+            cursor.classList.remove('hover');
+            cursorFollower.classList.remove('hover');
+        });
+    });
+
+    // 커서 숨기기/보이기
+    document.addEventListener('mouseenter', () => {
+        cursor.style.opacity = '1';
+        cursorFollower.style.opacity = '1';
+    });
+    document.addEventListener('mouseleave', () => {
+        cursor.style.opacity = '0';
+        cursorFollower.style.opacity = '0';
+    });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     // JavaScript가 로드되었음을 표시
     document.body.classList.add('js-loaded');
