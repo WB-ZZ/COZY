@@ -478,14 +478,36 @@ body::before {
 .features::before {
     content: '';
     position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
+    top: -200px;
+    right: -200px;
+    width: 600px;
+    height: 600px;
     background: 
-        radial-gradient(circle at 30% 40%, rgba(212, 175, 55, 0.03) 0%, transparent 50%),
-        radial-gradient(circle at 70% 80%, rgba(26, 22, 17, 0.02) 0%, transparent 50%);
-    animation: subtle-float 20s ease-in-out infinite;
+        conic-gradient(from 45deg, 
+            rgba(212, 175, 55, 0.3) 0deg, 
+            transparent 60deg, 
+            rgba(74, 52, 38, 0.2) 120deg, 
+            transparent 180deg, 
+            rgba(212, 175, 55, 0.3) 240deg, 
+            transparent 300deg);
+    border-radius: 50%;
+    animation: spin 45s linear infinite;
+}
+
+.features::after {
+    content: '';
+    position: absolute;
+    bottom: -150px;
+    left: -150px;
+    width: 500px;
+    height: 500px;
+    background: linear-gradient(135deg, 
+        rgba(212, 175, 55, 0.4) 0%, 
+        rgba(240, 230, 210, 0.3) 50%, 
+        transparent 100%);
+    border-radius: 50%;
+    filter: blur(50px);
+    animation: pulse 18s ease-in-out infinite;
 }
 
 @keyframes subtle-float {
@@ -763,6 +785,32 @@ body::before {
     background: var(--primary-dark);
     position: relative;
     overflow: hidden;
+}
+
+.gallery::before {
+    content: '';
+    position: absolute;
+    top: 15%;
+    left: 5%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(212, 175, 55, 0.5) 0%, transparent 70%);
+    border-radius: 50%;
+    filter: blur(40px);
+    animation: float 12s ease-in-out infinite;
+}
+
+.gallery::after {
+    content: '';
+    position: absolute;
+    bottom: 20%;
+    right: 10%;
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 60%);
+    border-radius: 50%;
+    filter: blur(30px);
+    animation: float 16s ease-in-out infinite reverse;
 }
 
 .gallery::before {
@@ -1221,6 +1269,42 @@ body::before {
 .contact {
     padding: 8rem 0;
     background: var(--cloud-gray);
+    position: relative;
+    overflow: hidden;
+}
+
+.contact::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    left: -100px;
+    width: 500px;
+    height: 500px;
+    background: 
+        conic-gradient(from 0deg, 
+            rgba(212, 175, 55, 0.2) 0deg, 
+            transparent 90deg, 
+            rgba(74, 52, 38, 0.15) 180deg, 
+            transparent 270deg);
+    border-radius: 50%;
+    animation: spin 50s linear infinite;
+    filter: blur(20px);
+}
+
+.contact::after {
+    content: '';
+    position: absolute;
+    bottom: -150px;
+    right: -150px;
+    width: 400px;
+    height: 400px;
+    background: linear-gradient(45deg, 
+        rgba(212, 175, 55, 0.3) 0%, 
+        rgba(251, 248, 243, 0.2) 50%, 
+        transparent 100%);
+    border-radius: 50%;
+    filter: blur(40px);
+    animation: pulse 14s ease-in-out infinite;
 }
 
 .contact-container {
