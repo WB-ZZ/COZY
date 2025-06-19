@@ -1702,7 +1702,7 @@ body::after {
 
 /* ===== 몰입형 갤러리 섹션 ===== */
 .gallery {
-    padding: 12rem 0;
+    padding: 4rem 0;
     background: var(--primary-dark);
     position: relative;
     overflow: hidden;
