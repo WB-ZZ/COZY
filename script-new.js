@@ -65,6 +65,35 @@ document.addEventListener('DOMContentLoaded', () => {
     // JavaScript가 로드되었음을 표시
     document.body.classList.add('js-loaded');
     
+    // ===== 마우스 추적 3D 효과 =====
+    const cards = document.querySelectorAll('.feature-card, .gallery-item');
+    
+    cards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            const rotateX = (y - centerY) / 10;
+            const rotateY = (centerX - x) / 10;
+            
+            card.style.transform = `
+                perspective(1000px) 
+                rotateX(${rotateX}deg) 
+                rotateY(${rotateY}deg) 
+                translateY(-8px) 
+                scale(1.02)
+            `;
+        });
+        
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px) scale(1)';
+        });
+    });
+    
     // ===== 스크롤 애니메이션 =====
     const observerOptions = {
         threshold: 0.1,
@@ -377,13 +406,26 @@ window.addEventListener('scroll', () => {
         }
     }
     
-    // 패럴랙스 효과
+    // 강화된 패럴랙스 효과
     if (hero && heroContent) {
-        const rate = scrolled * -0.5;
-        const opacity = Math.max(0, 1 - scrolled / (hero.offsetHeight * 0.8));
+        const rate = scrolled * -0.7;
+        const opacity = Math.max(0, 1 - scrolled / (hero.offsetHeight * 0.6));
+        const scale = Math.max(0.95, 1 - scrolled / (hero.offsetHeight * 2));
         
-        heroContent.style.transform = `translateY(${rate}px)`;
+        heroContent.style.transform = `translateY(${rate}px) scale(${scale})`;
         heroContent.style.opacity = opacity;
-        hero.style.transform = `translateY(${scrolled * 0.3}px)`;
+        hero.style.transform = `translateY(${scrolled * 0.4}px)`;
     }
+    
+    // 섹션별 패럴랙스
+    const sections = document.querySelectorAll('.features, .about, .gallery');
+    sections.forEach((section, index) => {
+        const rect = section.getBoundingClientRect();
+        const speed = 0.1 + (index * 0.05);
+        
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+            const yPos = -(scrolled * speed);
+            section.style.transform = `translateY(${yPos}px)`;
+        }
+    });
 });
