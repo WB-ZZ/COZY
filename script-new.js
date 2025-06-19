@@ -29,8 +29,8 @@ if (cursor && cursorFollower) {
     });
 
     const animateFollower = () => {
-        followerX += (mouseX - followerX) * 0.1;
-        followerY += (mouseY - followerY) * 0.1;
+        followerX += (mouseX - followerX) * 0.25;
+        followerY += (mouseY - followerY) * 0.25;
         cursorFollower.style.left = followerX + 'px';
         cursorFollower.style.top = followerY + 'px';
         requestAnimationFrame(animateFollower);
@@ -171,31 +171,38 @@ document.addEventListener('DOMContentLoaded', () => {
         const nightCountEl = document.getElementById('nightCount');
         const totalPriceEl = document.getElementById('totalPrice');
         
-        if (!roomType || !checkin || !checkout) return;
+        console.log('Updating booking price...'); // 디버깅용
         
         // 기본값
         let roomPrice = 0;
-        let nights = 0;
+        let nights = 1;
         let optionPrice = 0;
         
         // 객실 가격 계산
-        if (roomType.value) {
-            roomPrice = parseInt(roomType.selectedOptions[0].dataset.price) || 0;
+        if (roomType && roomType.value) {
+            const selectedOption = roomType.options[roomType.selectedIndex];
+            roomPrice = parseInt(selectedOption.getAttribute('data-price')) || 0;
+            console.log('Room price:', roomPrice); // 디버깅용
         }
         
         // 박수 계산
-        if (checkin.value && checkout.value) {
+        if (checkin && checkout && checkin.value && checkout.value) {
             const checkinDate = new Date(checkin.value);
             const checkoutDate = new Date(checkout.value);
             const timeDiff = checkoutDate.getTime() - checkinDate.getTime();
-            nights = Math.max(0, Math.ceil(timeDiff / (1000 * 3600 * 24)));
+            nights = Math.max(1, Math.ceil(timeDiff / (1000 * 3600 * 24)));
+            console.log('Nights:', nights); // 디버깅용
         }
         
         // 추가 옵션 계산
         const optionCheckboxes = document.querySelectorAll('.option-checkbox:checked');
+        console.log('Checked options:', optionCheckboxes.length); // 디버깅용
+        
         optionCheckboxes.forEach(checkbox => {
-            const price = parseInt(checkbox.dataset.price) || 0;
+            const price = parseInt(checkbox.getAttribute('data-price')) || 0;
             const guests = parseInt(guestCount?.textContent) || 2;
+            
+            console.log(`Option ${checkbox.id}: ${price}, guests: ${guests}`); // 디버깅용
             
             if (checkbox.id === 'breakfast') {
                 optionPrice += price * guests * nights;
@@ -208,51 +215,78 @@ document.addEventListener('DOMContentLoaded', () => {
         const totalRoomPrice = roomPrice * nights;
         const totalPrice = totalRoomPrice + optionPrice;
         
+        console.log('Final calculation:', { totalRoomPrice, optionPrice, totalPrice }); // 디버깅용
+        
         if (roomPriceEl) roomPriceEl.textContent = totalRoomPrice.toLocaleString() + '원';
         if (optionPriceEl) optionPriceEl.textContent = optionPrice.toLocaleString() + '원';
         if (nightCountEl) nightCountEl.textContent = nights + '박';
         if (totalPriceEl) totalPriceEl.textContent = totalPrice.toLocaleString() + '원';
     };
     
-    // 이벤트 리스너 추가
-    const roomTypeSelect = document.getElementById('roomType');
-    const checkinInput = document.getElementById('checkin');
-    const checkoutInput = document.getElementById('checkout');
-    const optionCheckboxes = document.querySelectorAll('.option-checkbox');
-    const guestControls = document.querySelectorAll('#increaseGuests, #decreaseGuests');
-    
-    if (roomTypeSelect) roomTypeSelect.addEventListener('change', updateBookingPrice);
-    if (checkinInput) checkinInput.addEventListener('change', updateBookingPrice);
-    if (checkoutInput) checkoutInput.addEventListener('change', updateBookingPrice);
-    
-    optionCheckboxes.forEach(checkbox => {
-        checkbox.addEventListener('change', updateBookingPrice);
-    });
-    
-    // 게스트 카운터
-    const increaseBtn = document.getElementById('increaseGuests');
-    const decreaseBtn = document.getElementById('decreaseGuests');
-    const guestCountEl = document.getElementById('guestCount');
-    
-    if (increaseBtn && guestCountEl) {
-        increaseBtn.addEventListener('click', () => {
-            let count = parseInt(guestCountEl.textContent) || 2;
-            if (count < 8) {
-                guestCountEl.textContent = count + 1;
-                updateBookingPrice();
-            }
+    // 이벤트 리스너 추가 - 페이지 로드 후 잠시 대기
+    setTimeout(() => {
+        const roomTypeSelect = document.getElementById('roomType');
+        const checkinInput = document.getElementById('checkin');
+        const checkoutInput = document.getElementById('checkout');
+        const optionCheckboxes = document.querySelectorAll('.option-checkbox');
+        
+        console.log('Setting up event listeners...'); // 디버깅용
+        console.log('Found elements:', { roomTypeSelect, checkinInput, checkoutInput, optionCount: optionCheckboxes.length });
+        
+        if (roomTypeSelect) {
+            roomTypeSelect.addEventListener('change', updateBookingPrice);
+            console.log('Room type listener added');
+        }
+        if (checkinInput) {
+            checkinInput.addEventListener('change', updateBookingPrice);
+            console.log('Check-in listener added');
+        }
+        if (checkoutInput) {
+            checkoutInput.addEventListener('change', updateBookingPrice);
+            console.log('Check-out listener added');
+        }
+        
+        optionCheckboxes.forEach((checkbox, index) => {
+            checkbox.addEventListener('change', updateBookingPrice);
+            console.log(`Option checkbox ${index} (${checkbox.id}) listener added`);
         });
-    }
+        
+        // 초기 계산 실행
+        updateBookingPrice();
+    }, 100);
     
-    if (decreaseBtn && guestCountEl) {
-        decreaseBtn.addEventListener('click', () => {
-            let count = parseInt(guestCountEl.textContent) || 2;
-            if (count > 1) {
-                guestCountEl.textContent = count - 1;
-                updateBookingPrice();
-            }
-        });
-    }
+    // 게스트 카운터 - 페이지 로드 후 설정
+    setTimeout(() => {
+        const increaseBtn = document.getElementById('increaseGuests');
+        const decreaseBtn = document.getElementById('decreaseGuests');
+        const guestCountEl = document.getElementById('guestCount');
+        
+        console.log('Setting up guest counter...', { increaseBtn, decreaseBtn, guestCountEl });
+        
+        if (increaseBtn && guestCountEl) {
+            increaseBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                let count = parseInt(guestCountEl.textContent) || 2;
+                if (count < 8) {
+                    guestCountEl.textContent = count + 1;
+                    updateBookingPrice();
+                    console.log('Guest count increased to:', count + 1);
+                }
+            });
+        }
+        
+        if (decreaseBtn && guestCountEl) {
+            decreaseBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                let count = parseInt(guestCountEl.textContent) || 2;
+                if (count > 1) {
+                    guestCountEl.textContent = count - 1;
+                    updateBookingPrice();
+                    console.log('Guest count decreased to:', count - 1);
+                }
+            });
+        }
+    }, 100);
 
     // ===== Stats 카운터 애니메이션 =====
     const animateCounter = (element, target, suffix = '') => {

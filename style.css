@@ -101,13 +101,13 @@
 
 .cursor-follower {
     position: fixed;
-    width: 40px;
-    height: 40px;
-    border: 2px solid rgba(212, 175, 55, 0.4);
+    width: 30px;
+    height: 30px;
+    border: 2px solid rgba(212, 175, 55, 0.6);
     border-radius: 50%;
     pointer-events: none;
     z-index: 9998;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
     transform: translate(-50%, -50%);
 }
 
@@ -154,7 +154,10 @@ a, button, .clickable {
 
 .loader-content {
     text-align: center;
-    transform: translateY(-50px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .cozy-logo {
@@ -257,23 +260,23 @@ body::before {
 @keyframes atmosphereFlow {
     0% { 
         transform: translate(-10%, -10%) rotate(0deg) scale(1);
-        opacity: 0.8;
-    }
-    25% { 
-        transform: translate(5%, 2%) rotate(90deg) scale(1.1);
         opacity: 1;
     }
-    50% { 
-        transform: translate(2%, 8%) rotate(180deg) scale(0.9);
+    25% { 
+        transform: translate(8%, 5%) rotate(90deg) scale(1.2);
         opacity: 0.9;
     }
+    50% { 
+        transform: translate(5%, 12%) rotate(180deg) scale(0.8);
+        opacity: 1;
+    }
     75% { 
-        transform: translate(-5%, -2%) rotate(270deg) scale(1.05);
-        opacity: 0.95;
+        transform: translate(-8%, -5%) rotate(270deg) scale(1.1);
+        opacity: 0.85;
     }
     100% { 
         transform: translate(-10%, -10%) rotate(360deg) scale(1);
-        opacity: 0.8;
+        opacity: 1;
     }
 }
 
