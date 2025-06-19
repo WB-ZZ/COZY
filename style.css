@@ -99,12 +99,14 @@ body {
     left: 0;
     right: 0;
     z-index: 1000;
-    padding: 1.5rem 0;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 2rem 0;
+    background: linear-gradient(135deg, 
+        rgba(254, 254, 254, 0.98) 0%, 
+        rgba(251, 248, 243, 0.96) 100%);
+    backdrop-filter: blur(25px) saturate(180%);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.2);
     transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 32px rgba(45, 24, 16, 0.08);
 }
 
 .nav-container {
@@ -146,22 +148,48 @@ body {
 .nav-menu {
     display: flex;
     list-style: none;
-    gap: 2.5rem;
+    gap: 3rem;
+    align-items: center;
+    padding: 0.5rem 1.5rem;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 50px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(212, 175, 55, 0.1);
+    box-shadow: 0 4px 20px rgba(45, 24, 16, 0.05);
 }
 
 .nav-link {
-    color: var(--warm-gray);
+    color: var(--deep-brown);
     text-decoration: none;
-    font-weight: 500;
-    padding: 0.5rem 0;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 0.75rem 0;
     border-bottom: 2px solid transparent;
     transition: all 0.3s ease;
-    letter-spacing: -0.005em;
+    letter-spacing: 0.01em;
+    position: relative;
 }
 
 .nav-link:hover {
-    color: var(--deep-brown);
-    border-bottom-color: var(--soft-charcoal);
+    color: var(--accent-gold);
+    border-bottom-color: var(--accent-gold);
+    transform: translateY(-1px);
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--accent-gold);
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.nav-link:hover::after {
+    width: 100%;
 }
 
 /* ===== 몰입감 있는 히어로 섹션 ===== */
@@ -350,10 +378,12 @@ body {
 }
 
 .btn-primary {
-    background: var(--gradient-depth);
+    background: linear-gradient(135deg, var(--deep-brown) 0%, var(--primary-warm) 50%, var(--accent-gold) 100%);
     color: var(--pure-white);
     box-shadow: var(--shadow-3d);
-    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    font-weight: 600;
+    letter-spacing: 0.02em;
 }
 
 .btn-primary:hover {
