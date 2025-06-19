@@ -1,16 +1,48 @@
 // 통합된 스크립트 - 중복 제거하여 재작성
 
-// ===== 페이지 로더 =====
-window.addEventListener('load', () => {
+// ===== 아늑한 펜션 로더 =====
+let loadingProgress = 0;
+const progressFill = document.querySelector('.progress-fill');
+const progressText = document.querySelector('.progress-text');
+
+// 로딩 진행률 시뮬레이션
+const updateProgress = () => {
+    if (loadingProgress < 100) {
+        loadingProgress += Math.random() * 15 + 5; // 5-20% 씩 증가
+        if (loadingProgress > 100) loadingProgress = 100;
+        
+        if (progressFill) progressFill.style.width = loadingProgress + '%';
+        if (progressText) progressText.textContent = Math.round(loadingProgress) + '%';
+        
+        setTimeout(updateProgress, 200 + Math.random() * 300); // 200-500ms 간격
+    } else {
+        completeLoading();
+    }
+};
+
+const completeLoading = () => {
     setTimeout(() => {
         const loader = document.querySelector('.page-loader');
         if (loader) {
             loader.classList.add('fade-out');
             setTimeout(() => {
                 loader.remove();
-            }, 800);
+            }, 1200);
         }
-    }, 1500);
+    }, 800);
+};
+
+// 페이지 로드 시작
+window.addEventListener('DOMContentLoaded', () => {
+    setTimeout(updateProgress, 500); // 0.5초 후 로딩 시작
+});
+
+// 페이지 완전 로드 시 100% 완료
+window.addEventListener('load', () => {
+    loadingProgress = 100;
+    if (progressFill) progressFill.style.width = '100%';
+    if (progressText) progressText.textContent = '100%';
+    setTimeout(completeLoading, 500);
 });
 
 // ===== 커스텀 커서 =====
