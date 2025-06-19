@@ -1555,7 +1555,7 @@ body::after {
 
 /* ===== About 섹션 ===== */
 .about {
-    padding: 4rem 0 0.5rem 0;
+    padding: 4rem 0 0rem 0;
     background: var(--gradient-forest);
     position: relative;
     overflow: hidden;
@@ -1702,7 +1702,7 @@ body::after {
 
 /* ===== 몰입형 갤러리 섹션 ===== */
 .gallery {
-    padding: 4rem 0;
+    padding: 12rem 0;
     background: var(--primary-dark);
     position: relative;
     overflow: hidden;
