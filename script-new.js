@@ -373,6 +373,77 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    // ===== 고객 후기 슬라이더 =====
+    const testimonialsTrack = document.getElementById('testimonialsTrack');
+    const testimonialItems = document.querySelectorAll('.testimonial-item');
+    const prevBtn = document.getElementById('testimonialPrev');
+    const nextBtn = document.getElementById('testimonialNext');
+    const dotsContainer = document.getElementById('testimonialsDots');
+    
+    if (testimonialsTrack && testimonialItems.length > 0) {
+        let currentTestimonial = 0;
+        const totalTestimonials = testimonialItems.length;
+        
+        // 닷 생성
+        for (let i = 0; i < totalTestimonials; i++) {
+            const dot = document.createElement('div');
+            dot.className = 'testimonial-dot';
+            if (i === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => goToTestimonial(i));
+            dotsContainer.appendChild(dot);
+        }
+        
+        const dots = document.querySelectorAll('.testimonial-dot');
+        
+        function updateTestimonials() {
+            // 트랙 이동
+            testimonialsTrack.style.transform = `translateX(-${currentTestimonial * 100}%)`;
+            
+            // 아이템 활성화
+            testimonialItems.forEach((item, index) => {
+                if (index === currentTestimonial) {
+                    item.classList.add('active');
+                } else {
+                    item.classList.remove('active');
+                }
+            });
+            
+            // 닷 업데이트
+            dots.forEach((dot, index) => {
+                if (index === currentTestimonial) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+        }
+        
+        function goToTestimonial(index) {
+            currentTestimonial = index;
+            updateTestimonials();
+        }
+        
+        function nextTestimonial() {
+            currentTestimonial = (currentTestimonial + 1) % totalTestimonials;
+            updateTestimonials();
+        }
+        
+        function prevTestimonial() {
+            currentTestimonial = (currentTestimonial - 1 + totalTestimonials) % totalTestimonials;
+            updateTestimonials();
+        }
+        
+        // 이벤트 리스너
+        if (nextBtn) nextBtn.addEventListener('click', nextTestimonial);
+        if (prevBtn) prevBtn.addEventListener('click', prevTestimonial);
+        
+        // 자동 슬라이드 (5초마다)
+        setInterval(nextTestimonial, 5000);
+        
+        // 초기화
+        updateTestimonials();
+    }
 });
 
 // ===== 스무스 스크롤 =====
