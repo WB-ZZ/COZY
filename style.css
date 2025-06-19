@@ -1980,12 +1980,12 @@ body::after {
 /* ===== 고객 후기 섹션 ===== */
 .testimonials {
     padding: 1rem 0 3rem 0;
-    background: var(--gradient-luxury);
+    background: red;
     position: relative;
     overflow: hidden;
     opacity: 1;
     visibility: visible;
-    margin-top: -20px;
+    margin-top: -1px;
 }
 
 .testimonials::before {
