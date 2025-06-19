@@ -98,6 +98,100 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // ===== 예약 폼 계산기 =====
+    const updateBookingPrice = () => {
+        const roomType = document.getElementById('roomType');
+        const checkin = document.getElementById('checkin');
+        const checkout = document.getElementById('checkout');
+        const guestCount = document.getElementById('guestCount');
+        const roomPriceEl = document.getElementById('roomPrice');
+        const optionPriceEl = document.getElementById('optionPrice');
+        const nightCountEl = document.getElementById('nightCount');
+        const totalPriceEl = document.getElementById('totalPrice');
+        
+        if (!roomType || !checkin || !checkout) return;
+        
+        // 기본값
+        let roomPrice = 0;
+        let nights = 0;
+        let optionPrice = 0;
+        
+        // 객실 가격 계산
+        if (roomType.value) {
+            roomPrice = parseInt(roomType.selectedOptions[0].dataset.price) || 0;
+        }
+        
+        // 박수 계산
+        if (checkin.value && checkout.value) {
+            const checkinDate = new Date(checkin.value);
+            const checkoutDate = new Date(checkout.value);
+            const timeDiff = checkoutDate.getTime() - checkinDate.getTime();
+            nights = Math.max(0, Math.ceil(timeDiff / (1000 * 3600 * 24)));
+        }
+        
+        // 추가 옵션 계산
+        const optionCheckboxes = document.querySelectorAll('.option-checkbox:checked');
+        optionCheckboxes.forEach(checkbox => {
+            const price = parseInt(checkbox.dataset.price) || 0;
+            const guests = parseInt(guestCount?.textContent) || 2;
+            
+            if (checkbox.id === 'breakfast') {
+                optionPrice += price * guests * nights;
+            } else {
+                optionPrice += price;
+            }
+        });
+        
+        // UI 업데이트
+        const totalRoomPrice = roomPrice * nights;
+        const totalPrice = totalRoomPrice + optionPrice;
+        
+        if (roomPriceEl) roomPriceEl.textContent = totalRoomPrice.toLocaleString() + '원';
+        if (optionPriceEl) optionPriceEl.textContent = optionPrice.toLocaleString() + '원';
+        if (nightCountEl) nightCountEl.textContent = nights + '박';
+        if (totalPriceEl) totalPriceEl.textContent = totalPrice.toLocaleString() + '원';
+    };
+    
+    // 이벤트 리스너 추가
+    const roomTypeSelect = document.getElementById('roomType');
+    const checkinInput = document.getElementById('checkin');
+    const checkoutInput = document.getElementById('checkout');
+    const optionCheckboxes = document.querySelectorAll('.option-checkbox');
+    const guestControls = document.querySelectorAll('#increaseGuests, #decreaseGuests');
+    
+    if (roomTypeSelect) roomTypeSelect.addEventListener('change', updateBookingPrice);
+    if (checkinInput) checkinInput.addEventListener('change', updateBookingPrice);
+    if (checkoutInput) checkoutInput.addEventListener('change', updateBookingPrice);
+    
+    optionCheckboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', updateBookingPrice);
+    });
+    
+    // 게스트 카운터
+    const increaseBtn = document.getElementById('increaseGuests');
+    const decreaseBtn = document.getElementById('decreaseGuests');
+    const guestCountEl = document.getElementById('guestCount');
+    
+    if (increaseBtn && guestCountEl) {
+        increaseBtn.addEventListener('click', () => {
+            let count = parseInt(guestCountEl.textContent) || 2;
+            if (count < 8) {
+                guestCountEl.textContent = count + 1;
+                updateBookingPrice();
+            }
+        });
+    }
+    
+    if (decreaseBtn && guestCountEl) {
+        decreaseBtn.addEventListener('click', () => {
+            let count = parseInt(guestCountEl.textContent) || 2;
+            if (count > 1) {
+                guestCountEl.textContent = count - 1;
+                updateBookingPrice();
+            }
+        });
+    }
+
     // ===== Stats 카운터 애니메이션 =====
     const animateCounter = (element, target, suffix = '') => {
         let current = 0;
