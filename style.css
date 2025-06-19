@@ -1986,7 +1986,7 @@ body::after {
     overflow: hidden;
     opacity: 1;
     visibility: visible;
-    margin-top: -12rem;
+    margin-top: -50rem;
 }
 
 .testimonials::before {
