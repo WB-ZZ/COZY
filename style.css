@@ -1559,6 +1559,7 @@ body::after {
     background: var(--gradient-forest);
     position: relative;
     overflow: hidden;
+    border-bottom: 5px solid red;
 }
 
 .about::before {
