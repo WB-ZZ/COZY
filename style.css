@@ -1985,7 +1985,7 @@ body::after {
     overflow: hidden;
     opacity: 1;
     visibility: visible;
-    margin-top: 0;
+    margin-top: -1rem;
 }
 
 .testimonials::before {
@@ -3176,11 +3176,15 @@ body::after {
     .features,
     .gallery,
     .about,
-    .testimonials,
     .stats,
     .cta,
     .contact {
         padding: 3rem 0;
+    }
+    
+    .testimonials {
+        padding: 1rem 0 3rem 0;
+        margin-top: -1rem;
     }
     
     /* 피처 그리드 모바일 */
