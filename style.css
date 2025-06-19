@@ -1443,7 +1443,7 @@ body::after {
 
 /* ===== About 섹션 ===== */
 .about {
-    padding: 4rem 0;
+    padding: 4rem 0 2rem 0;
     background: var(--gradient-forest);
     position: relative;
     overflow: hidden;
@@ -1867,7 +1867,7 @@ body::after {
 
 /* ===== 고객 후기 섹션 ===== */
 .testimonials {
-    padding: 3rem 0;
+    padding: 2rem 0 3rem 0;
     background: var(--gradient-luxury);
     position: relative;
     overflow: hidden;
@@ -2681,6 +2681,65 @@ body::after {
     background: var(--charcoal);
     transform: translateY(-2px);
     box-shadow: var(--shadow-hover);
+}
+
+/* ===== 맨 위로 버튼 ===== */
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: var(--accent-gold);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    z-index: 1000;
+    box-shadow: 
+        0 8px 25px rgba(212, 175, 55, 0.3),
+        0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.back-to-top:hover {
+    transform: translateY(-5px) scale(1.1);
+    background: #f5d76e;
+    box-shadow: 
+        0 12px 35px rgba(212, 175, 55, 0.4),
+        0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.back-to-top:active {
+    transform: translateY(-2px) scale(1.05);
+}
+
+.back-to-top i {
+    animation: bounceUp 2s ease-in-out infinite;
+}
+
+@keyframes bounceUp {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-3px); }
+}
+
+@media (max-width: 768px) {
+    .back-to-top {
+        bottom: 20px;
+        right: 20px;
+        width: 45px;
+        height: 45px;
+        font-size: 1rem;
+    }
 }
 
 /* ===== 푸터 ===== */

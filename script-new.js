@@ -531,4 +531,27 @@ window.addEventListener('scroll', () => {
             section.style.transform = `translateY(${yPos}px)`;
         }
     });
+    
+    // 맨 위로 버튼 표시/숨기기
+    const backToTopBtn = document.getElementById('backToTop');
+    if (backToTopBtn) {
+        if (scrolled > 500) {
+            backToTopBtn.classList.add('visible');
+        } else {
+            backToTopBtn.classList.remove('visible');
+        }
+    }
+});
+
+// ===== 맨 위로 버튼 클릭 이벤트 =====
+document.addEventListener('DOMContentLoaded', () => {
+    const backToTopBtn = document.getElementById('backToTop');
+    if (backToTopBtn) {
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
 });
